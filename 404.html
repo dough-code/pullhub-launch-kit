@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pullhub</title>
+  <script>
+    (function () {
+      var path = window.location.pathname.replace(/\/+$/, '');
+      var match = path.match(/^\/boards\/([^/?#]+)$/);
+      if (match) {
+        var id = encodeURIComponent(match[1]);
+        window.location.replace('/board-viewer.html?bid=' + id + '&pid=smart-reference-ee585');
+        return;
+      }
+      window.location.replace('/');
+    })();
+  </script>
+</head>
+<body></body>
+</html>

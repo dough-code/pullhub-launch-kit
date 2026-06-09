@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pullhub | Board Viewer</title>
+  <link rel="icon" href="pullhub-icon.svg" type="image/svg+xml">
+  <style>
+    /* ============================================================
+       PULLHUB — caution-yellow / hazard system
+       Same neo-brutalist ledger language as the landing page:
+       thick ink borders, hard offset shadows, safety-yellow accent,
+       mono-uppercase labels, hazard stripes, pill buttons.
+       ============================================================ */
+    :root {
+      --ink:        #2b2620;
+      --ink-soft:   #6b6358;
+      --paper:      #fdfcf8;
+
+      --accent:     #f4d23a;   /* safety yellow */
+      --accent-deep:#e0bd1f;
+      --accent-ink: #4d3f0a;
+
+      --pop-1: #b79bdc;  /* lilac */
+      --pop-2: #5b8fd6;  /* blue  */
+      --pop-3: #e07a52;  /* coral */
+      --pop-grn: #6fb88a;
+
+      --bg:   #efebe1;
+      --line: var(--ink);
+      --bd: 2px;
+      --r: 14px;
+      --maxw: 1320px;
+
+      --font: "Schibsted Grotesk", system-ui, sans-serif;
+      --mono: "Space Mono", ui-monospace, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--ink); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+
+    .hazard {
+      background-image: repeating-linear-gradient(45deg, var(--accent) 0 14px, var(--ink) 14px 28px);
+    }
+
+    /* ── Header ── */
+    header {
+      background: color-mix(in oklab, var(--bg) 88%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: var(--bd) solid var(--ink);
+      padding: 16px clamp(18px,3vw,28px);
+      display: flex; align-items: center; gap: 14px;
+      position: sticky; top: 0; z-index: 10;
+    }
+    .logo {
+      width: 38px; height: 38px; border-radius: 10px; background: var(--accent);
+      border: var(--bd) solid var(--ink); box-shadow: 3px 3px 0 0 var(--ink);
+      display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0;
+    }
+    .logo img { width: 28px; height: 28px; object-fit: contain; display: block; }
+    header h1 { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+    header .board-meta { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); margin-top: 2px; }
+    .hdr-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+    #copy-link-btn {
+      font-family: var(--mono); font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em;
+      padding: 8px 14px; background: var(--paper); color: var(--ink);
+      border: var(--bd) solid var(--ink); border-radius: 999px; cursor: pointer;
+      box-shadow: 3px 3px 0 0 var(--ink); transition: transform .12s ease, box-shadow .12s ease, background .15s;
+    }
+    #copy-link-btn:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 0 var(--ink); background: var(--accent); }
+    #copy-link-btn:active { transform: translate(1px,1px); box-shadow: 1px 1px 0 0 var(--ink); }
+    .powered {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink-soft); display: inline-flex; align-items: center; gap: 7px;
+    }
+    .powered::before { content: ""; width: 18px; height: 3px; background: var(--accent); display: inline-block; border-radius: 2px; }
+
+    /* ── Main ── */
+    main { max-width: var(--maxw); margin: 0 auto; padding: 32px clamp(18px,3vw,28px) 64px; }
+
+    /* ── Board header row ── */
+    .board-header {
+      margin-bottom: 22px; display: flex; align-items: center; gap: 13px; flex-wrap: wrap;
+      padding-bottom: 18px; border-bottom: var(--bd) solid var(--ink);
+    }
+    .board-dot { width: 15px; height: 15px; border-radius: 5px; background: var(--accent); border: var(--bd) solid var(--ink); flex-shrink: 0; }
+    .board-title { font-size: 24px; font-weight: 900; letter-spacing: -0.03em; }
+    .board-count {
+      font-family: var(--mono); font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em;
+      color: var(--ink); background: var(--paper); border: 1.5px solid var(--ink);
+      border-radius: 999px; padding: 4px 11px;
+    }
+    .layout-controls { margin-left: auto; display: flex; gap: 6px; }
+    .layout-btn {
+      width: 34px; height: 34px; border-radius: 9px; border: var(--bd) solid var(--ink);
+      background: var(--paper); cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 15px; color: var(--ink); transition: transform .12s ease, box-shadow .12s ease, background .15s;
+      box-shadow: 2px 2px 0 0 var(--ink);
+    }
+    .layout-btn:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 0 var(--ink); }
+    .layout-btn.active { background: var(--accent); border-color: var(--ink); }
+    #export-zip-btn {
+      height: 34px; border-radius: 9px; border: var(--bd) solid var(--ink);
+      background: var(--paper); color: var(--ink); cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px; padding: 0 12px;
+      font-family: var(--mono); font-size: 11.5px; font-weight: 800;
+      box-shadow: 2px 2px 0 0 var(--ink); transition: transform .12s ease, box-shadow .12s ease, background .15s;
+    }
+    #export-zip-btn:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 0 var(--ink); background: var(--accent); }
+
+    /* ── Grid layout (default) ── */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+
+    /* ── Portrait layout ── */
+    .grid.portrait { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+    .grid.portrait .card img { aspect-ratio: 3/4; object-fit: cover; }
+
+    /* ── Masonry layout ── */
+    .grid.masonry { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 260px)); justify-content: start; align-items: start; }
+    .grid.masonry .card { display: block; }
+    .grid.masonry .card img { aspect-ratio: unset; height: auto; }
+    @media (max-width: 900px) { .grid.masonry { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); } }
+    @media (max-width: 600px) { .grid.masonry { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); } }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--paper); border: var(--bd) solid var(--ink); border-radius: var(--r);
+      overflow: hidden; box-shadow: 5px 5px 0 0 var(--ink);
+      transition: transform .14s ease, box-shadow .14s ease; cursor: pointer; position: relative;
+    }
+    .card:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 0 var(--ink); }
+    .card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; background: var(--bg); }
+
+    /* alternate hard-shadow colors for visual rhythm, hazard-system style */
+    .card:nth-child(3n+2) { box-shadow: 5px 5px 0 0 var(--pop-2); }
+    .card:nth-child(3n+2):hover { box-shadow: 7px 7px 0 0 var(--pop-2); }
+    .card:nth-child(3n+3) { box-shadow: 5px 5px 0 0 var(--pop-3); }
+    .card:nth-child(3n+3):hover { box-shadow: 7px 7px 0 0 var(--pop-3); }
+
+    /* ── Hover quick actions ── */
+    .card-actions { position: absolute; top: 9px; right: 9px; display: none; gap: 6px; }
+    .card:hover .card-actions { display: flex; }
+    .card-action-btn {
+      background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); border-radius: 7px;
+      padding: 6px 10px; font-size: 12px; cursor: pointer; text-decoration: none;
+      display: flex; align-items: center; transition: background .12s, transform .1s; line-height: 1;
+      box-shadow: 2px 2px 0 0 var(--ink); font-family: var(--mono); font-weight: 700;
+    }
+    .card-action-btn:hover { background: var(--accent); transform: translate(-1px,-1px); box-shadow: 3px 3px 0 0 var(--ink); }
+
+    /* ── Card footer ── */
+    .card-footer { border-top: var(--bd) solid var(--ink); }
+    .card-source-link {
+      display: block; padding: 8px 12px; font-family: var(--mono); font-size: 11px; font-weight: 700;
+      color: var(--accent-ink); text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      transition: background .12s;
+    }
+    .card-source-link:hover { background: var(--accent); color: var(--ink); }
+    .card .card-note { padding: 8px 12px; font-size: 11.5px; color: var(--ink-soft); font-weight: 600; border-top: 1.5px dashed color-mix(in oklab, var(--ink) 30%, transparent); }
+
+    /* ── Lightbox ── */
+    #lightbox { display: none; position: fixed; inset: 0; background: oklch(0.1 0 0 / .92); z-index: 1000; align-items: center; justify-content: center; }
+    #lightbox.show { display: flex; }
+    #lb-img { max-width: 88vw; max-height: 86vh; border-radius: 10px; object-fit: contain; border: var(--bd) solid var(--ink); box-shadow: 8px 8px 0 0 var(--accent); }
+    #lb-close {
+      position: absolute; top: 18px; right: 22px; color: var(--paper); font-size: 22px; cursor: pointer;
+      background: var(--ink); border: var(--bd) solid var(--accent); border-radius: 50%;
+      width: 38px; height: 38px; line-height: 1; display: grid; place-items: center; transition: transform .12s;
+    }
+    #lb-close:hover { transform: scale(1.08); }
+    #lb-dl {
+      position: absolute; bottom: 24px; right: 24px; background: var(--accent); color: var(--ink);
+      border: var(--bd) solid var(--ink); border-radius: 999px; padding: 10px 18px; font-family: var(--mono);
+      font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; text-decoration: none;
+      box-shadow: 4px 4px 0 0 var(--ink); transition: transform .12s ease, box-shadow .12s ease;
+    }
+    #lb-dl:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 0 var(--ink); }
+    #lb-counter {
+      position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
+      font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+      color: var(--ink); background: var(--accent); border: 1.5px solid var(--ink);
+      border-radius: 999px; padding: 6px 14px; pointer-events: none;
+    }
+    /* Arrow buttons */
+    .lb-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 46px; height: 46px; border-radius: 50%;
+      background: var(--paper); border: var(--bd) solid var(--ink); color: var(--ink);
+      font-size: 20px; cursor: pointer; display: none;
+      align-items: center; justify-content: center; transition: transform .12s ease, box-shadow .12s ease;
+      box-shadow: 3px 3px 0 0 var(--ink);
+    }
+    .lb-arrow:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 0 var(--ink); }
+    #lb-prev { left: 20px; }
+    #lb-next { right: 20px; }
+
+    /* ── States ── */
+    .state { text-align: center; padding: 90px 20px; color: var(--ink-soft); }
+    .state .emoji {
+      font-size: 30px; margin: 0 auto 18px; width: 64px; height: 64px; border-radius: 16px;
+      background: var(--paper); border: var(--bd) solid var(--ink); box-shadow: 5px 5px 0 0 var(--ink);
+      display: grid; place-items: center;
+    }
+    .state h2 { font-size: 19px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; color: var(--ink); }
+    .state p { font-size: 14px; }
+    .spinner {
+      width: 36px; height: 36px; border: 3px solid color-mix(in oklab, var(--accent) 35%, transparent);
+      border-top-color: var(--ink); border-radius: 50%; animation: spin .7s linear infinite; margin: 0 auto 18px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Classic theme (default share-page view) ── */
+    body.theme-classic {
+      --ink: #24262b;
+      --ink-soft: #737780;
+      --paper: #ffffff;
+      --accent: #f4c430;
+      --accent-deep: #e5b425;
+      --accent-ink: #3d3d3f;
+      --bg: #f5f6f8;
+      --line: #d9dde4;
+      --bd: 1px;
+      --r: 10px;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: var(--bg);
+      color: var(--ink);
+      letter-spacing: 0;
+    }
+    body.theme-classic header {
+      background: rgba(255,255,255,.92);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 1px 2px rgba(15,23,42,.04);
+      backdrop-filter: blur(10px);
+    }
+    body.theme-classic .logo {
+      width: 36px; height: 36px; border: 0; border-radius: 8px;
+      background: transparent; box-shadow: none;
+    }
+    body.theme-classic .logo img { width: 32px; height: 32px; }
+    body.theme-classic header h1 {
+      font-size: 17px; font-weight: 700; letter-spacing: 0;
+    }
+    body.theme-classic header .board-meta,
+    body.theme-classic .powered,
+    body.theme-classic .board-count,
+    body.theme-classic .card-source-link,
+    body.theme-classic #copy-link-btn,
+    body.theme-classic #lb-dl,
+    body.theme-classic #lb-counter {
+      font-family: var(--mono);
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    body.theme-classic .powered::before { background: var(--accent); }
+    body.theme-classic #copy-link-btn,
+    body.theme-classic .layout-btn,
+    body.theme-classic .card-action-btn,
+    body.theme-classic #lb-dl {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: none;
+      background: #fff;
+    }
+    body.theme-classic #copy-link-btn:hover,
+    body.theme-classic .card-action-btn:hover {
+      transform: none;
+      box-shadow: none;
+      background: #f1f3f5;
+    }
+    body.theme-classic main {
+      max-width: 1280px;
+      padding-top: 30px;
+    }
+    body.theme-classic .board-header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 16px;
+    }
+    body.theme-classic .board-dot {
+      width: 12px; height: 12px; border: 0; border-radius: 4px;
+    }
+    body.theme-classic .board-title {
+      font-size: 24px; font-weight: 700; letter-spacing: 0;
+    }
+    body.theme-classic .board-count {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink-soft);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    body.theme-classic .layout-btn {
+      width: 36px; height: 36px;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+    body.theme-classic .layout-btn:hover {
+      transform: none;
+      box-shadow: none;
+      color: var(--ink);
+      background: #f8f9fb;
+    }
+    body.theme-classic .layout-btn.active {
+      background: var(--accent);
+      border-color: #d6b12a;
+      color: #222;
+    }
+    body.theme-classic #export-zip-btn {
+      border: 1px solid var(--line);
+      box-shadow: none;
+      background: #fff;
+      color: var(--ink-soft);
+    }
+    body.theme-classic #export-zip-btn:hover {
+      transform: none;
+      box-shadow: none;
+      color: var(--ink);
+      background: #f8f9fb;
+    }
+    body.theme-classic .grid { gap: 18px; }
+    body.theme-classic .card,
+    body.theme-classic .card:nth-child(3n+2),
+    body.theme-classic .card:nth-child(3n+3) {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(15,23,42,.08);
+      background: #fff;
+    }
+    body.theme-classic .card:hover,
+    body.theme-classic .card:nth-child(3n+2):hover,
+    body.theme-classic .card:nth-child(3n+3):hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(15,23,42,.10);
+    }
+    body.theme-classic .card img { background: #eef0f3; }
+    body.theme-classic .card-footer {
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+    body.theme-classic .card-source-link {
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+    body.theme-classic .card-source-link:hover {
+      background: #f7f8fa;
+      color: var(--ink);
+    }
+    body.theme-classic .card .card-note {
+      border-top: 1px solid var(--line);
+      font-weight: 400;
+    }
+    body.theme-classic .state .emoji {
+      border: 1px solid var(--line);
+      box-shadow: none;
+      background: #fff;
+    }
+    body.theme-classic .state h2 {
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+    body.theme-classic #lb-img {
+      border: 0;
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+    }
+    body.theme-classic #lb-close,
+    body.theme-classic .lb-arrow {
+      border: 1px solid rgba(255,255,255,.2);
+      box-shadow: none;
+      background: rgba(255,255,255,.92);
+      color: #222;
+    }
+    body.theme-classic .lb-arrow:hover {
+      transform: translateY(-50%);
+      box-shadow: none;
+      background: #fff;
+    }
+    .theme-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px;
+      border: var(--bd) solid var(--ink);
+      border-radius: 999px;
+      background: var(--paper);
+      box-shadow: 2px 2px 0 0 var(--ink);
+    }
+    .theme-btn {
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--ink-soft);
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 6px 10px;
+    }
+    .theme-btn.active {
+      background: var(--accent);
+      color: var(--ink);
+    }
+    body.theme-classic .theme-switch {
+      border: 1px solid var(--line);
+      box-shadow: none;
+      background: #fff;
+    }
+    body.theme-classic .theme-btn {
+      font-family: var(--mono);
+      color: var(--ink-soft);
+    }
+    body.theme-classic .theme-btn.active {
+      background: #24262b;
+      color: #fff;
+    }
+  </style>
+</head>
+<body class="theme-classic">
+
+<header>
+  <div class="logo"><img src="pullhub-icon.svg" alt="Pullhub"></div>
+  <div>
+    <h1>Pullhub</h1>
+    <div class="board-meta" id="hdr-meta">Loading board…</div>
+  </div>
+  <div class="hdr-right">
+    <div class="theme-switch" aria-label="Viewer theme">
+      <button class="theme-btn active" id="theme-classic-btn" type="button">Classic</button>
+      <button class="theme-btn" id="theme-pullhub-btn" type="button">Pullhub</button>
+    </div>
+    <button id="copy-link-btn">🔗 Copy link</button>
+    <button id="export-zip-btn" type="button">Export ZIP</button>
+    <span class="powered">Shared via Pullhub</span>
+  </div>
+</header>
+
+<main>
+  <div id="state-loading" class="state">
+    <div class="spinner"></div>
+    <h2>Loading board…</h2>
+    <p id="loading-sub">Fetching board data…</p>
+  </div>
+  <div id="state-error" class="state" style="display:none;">
+    <div class="emoji">⚠️</div>
+    <h2>Board not found</h2>
+    <p id="error-msg">This board may have been removed or the link is invalid.</p>
+  </div>
+  <div id="board-view" style="display:none;">
+    <div class="board-header">
+      <div class="board-dot" id="board-dot"></div>
+      <span class="board-title" id="board-title"></span>
+      <span class="board-count" id="board-count"></span>
+      <!-- Layout controls (top-right of board) -->
+      <div class="layout-controls">
+        <button id="btn-layout-grid"    class="layout-btn active" title="Grid layout">⊞</button>
+        <button id="btn-layout-portrait" class="layout-btn"       title="Portrait layout">▯</button>
+        <button id="btn-layout-masonry" class="layout-btn"        title="Masonry layout (Pinterest style)">⊟</button>
+      </div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</main>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <button id="lb-close">✕</button>
+  <span id="lb-counter"></span>
+  <button id="lb-prev" class="lb-arrow">‹</button>
+  <button id="lb-next" class="lb-arrow">›</button>
+  <img id="lb-img" src="" alt="">
+  <a id="lb-dl" download="srh-image.jpg">⬇ Download</a>
+</div>
+
+<script src="jszip.min.js"></script>
+<script src="board-viewer.js"></script>
+</body>
+</html>

@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pullhub | Pull. Save. Slide.</title>
+<link rel="icon" href="pullhub-icon.svg" type="image/svg+xml">
+<style>/* cyrillic */
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/412f2f88-51dc-4721-8ed6-1b911ef440d6.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/8255e194-a20a-4e86-9b73-30552abca56e.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/f13fe979-997b-4c7b-9acd-26e339fbb91d.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/412f2f88-51dc-4721-8ed6-1b911ef440d6.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/8255e194-a20a-4e86-9b73-30552abca56e.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/f13fe979-997b-4c7b-9acd-26e339fbb91d.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/412f2f88-51dc-4721-8ed6-1b911ef440d6.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/8255e194-a20a-4e86-9b73-30552abca56e.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/f13fe979-997b-4c7b-9acd-26e339fbb91d.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/412f2f88-51dc-4721-8ed6-1b911ef440d6.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/8255e194-a20a-4e86-9b73-30552abca56e.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/f13fe979-997b-4c7b-9acd-26e339fbb91d.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/1c67ea38-f605-4f4b-8d08-14bff912f820.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/f9412008-b8f0-44a3-8dcd-20d485288e32.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/1c67ea38-f605-4f4b-8d08-14bff912f820.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/f9412008-b8f0-44a3-8dcd-20d485288e32.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/1c67ea38-f605-4f4b-8d08-14bff912f820.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/f9412008-b8f0-44a3-8dcd-20d485288e32.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/1c67ea38-f605-4f4b-8d08-14bff912f820.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/f9412008-b8f0-44a3-8dcd-20d485288e32.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("assets/fonts/1c67ea38-f605-4f4b-8d08-14bff912f820.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("assets/fonts/f9412008-b8f0-44a3-8dcd-20d485288e32.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("assets/fonts/1c67ea38-f605-4f4b-8d08-14bff912f820.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("assets/fonts/f9412008-b8f0-44a3-8dcd-20d485288e32.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/4dfe9f4b-0774-4181-bc36-b36f9f3398b3.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/478cc48b-b602-4059-9554-7bdfcee34f1b.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/c886daec-c59a-45f6-a81e-67b72df71ce3.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/67fe4eee-1615-4c71-aa0f-0a0fd78dffa3.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/18283bad-2efa-437a-921d-eb6b2d3f3d5f.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/820a6fdc-0813-4b84-ab26-a403552ec1da.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>/* ============================================================
+   PULLHUB — caution-yellow / hazard system
+   Loud but balanced: a strict grid ledger holding playful pops.
+   ============================================================ */
+
+:root {
+  --ink:        oklch(0.18 0.008 65);
+  --ink-soft:   oklch(0.42 0.010 65);
+  --paper:      oklch(0.992 0.003 85);
+
+  /* caution yellow = the brand */
+  --accent:     oklch(0.855 0.165 92);   /* safety yellow */
+  --accent-deep:oklch(0.80 0.155 86);
+  --accent-ink: oklch(0.30 0.10 92);
+
+  /* secondary pops (set per theme) */
+  --pop-1: oklch(0.72 0.13 305);  /* lilac */
+  --pop-2: oklch(0.62 0.17 250);  /* blue  */
+  --pop-3: oklch(0.68 0.18 35);   /* coral */
+
+  --bg:   oklch(0.95 0.012 85);
+  --line: var(--ink);
+  --bd: 2px;
+  --maxw: 1320px;
+  --r: 16px;
+
+  --font: "Schibsted Grotesk", system-ui, sans-serif;
+  --mono: "Space Mono", ui-monospace, monospace;
+}
+
+/* ---- background variants ---- */
+.page[data-bg="white"] { --bg: oklch(0.986 0.003 85); }
+.page[data-bg="blush"] { --bg: oklch(0.94 0.014 32); }
+
+/* ---- theme / secondary-pop variants ---- */
+.page[data-theme="mono"] { --pop-1: oklch(0.46 0.01 65); --pop-2: oklch(0.62 0.012 65); --pop-3: var(--accent-deep); }
+.page[data-theme="pop"]  { --pop-1: oklch(0.80 0.20 130); --pop-2: oklch(0.62 0.24 330); --pop-3: oklch(0.66 0.20 250); }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+.mono { font-family: var(--mono); }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* hazard stripe motif */
+.hazard {
+  background-image: repeating-linear-gradient(45deg,
+    var(--accent) 0 16px, var(--ink) 16px 32px);
+}
+
+/* ---- the grid ledger ---- */
+.page {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  background: var(--bg);
+  border-left: var(--bd) solid var(--line);
+  border-right: var(--bd) solid var(--line);
+}
+.rule-b { border-bottom: var(--bd) solid var(--line); }
+.pad { padding: 0 clamp(20px, 4vw, 56px); }
+
+/* ---- buttons ---- */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font); font-weight: 700; font-size: 15.5px;
+  padding: 14px 22px; border-radius: 999px;
+  border: var(--bd) solid var(--ink); background: var(--ink); color: var(--paper);
+  cursor: pointer; transition: transform .12s ease, box-shadow .12s ease, background .15s;
+  box-shadow: 4px 4px 0 0 var(--ink);
+}
+.btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 0 var(--ink); }
+.btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 0 var(--ink); }
+.btn--yellow { background: var(--accent); color: var(--ink); }
+.btn--ghost { background: transparent; color: var(--ink); box-shadow: none; }
+.btn--ghost:hover { background: var(--paper); box-shadow: 4px 4px 0 0 var(--ink); }
+
+/* ---- shared bits ---- */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--mono); font-size: 12px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft);
+}
+.eyebrow .bar { width: 26px; height: 3px; background: var(--accent); display: inline-block; }
+.kicker {
+  font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--ink-soft);
+  display: inline-flex; align-items: center; gap: 9px;
+}
+
+/* ============ NAV ============ */
+.nav { position: sticky; top: 0; z-index: 60; background: color-mix(in oklch, var(--bg) 88%, transparent); backdrop-filter: blur(8px); }
+.nav-inner { display: flex; align-items: stretch; height: 72px; }
+.brand { display: flex; align-items: center; gap: 11px; font-weight: 800; font-size: 21px; letter-spacing: -0.02em; padding-right: 30px; }
+.logo-mark { width: 36px; height: 36px; flex: none; display: block; }
+.foot-brand .logo-mark { width: 40px; height: 40px; }
+.nav-links { display: flex; align-items: center; gap: 28px; margin-left: auto; font-weight: 600; font-size: 15px; }
+.nav-links a.l { color: var(--ink-soft); }
+.nav-links a.l:hover { color: var(--ink); }
+.nav-cta { display: flex; align-items: center; padding-left: 28px; border-left: var(--bd) solid var(--line); margin-left: 28px; }
+@media (max-width: 860px){ .nav-links .l { display: none; } .nav-cta { border-left: none; margin-left: 0; padding-left: 0; } }
+
+/* ============ HERO ============ */
+.hero { display: grid; grid-template-columns: 1.05fr 0.95fr; }
+.hero[data-layout="stacked"] { grid-template-columns: 1fr; }
+.hero-left { padding: clamp(40px,5vw,72px) clamp(24px,4vw,56px); display: flex; flex-direction: column; justify-content: center; }
+.hero-right { border-left: var(--bd) solid var(--line); position: relative; padding: clamp(32px,4vw,52px); display: grid; place-items: center; overflow: visible; min-height: 460px; }
+.hero[data-layout="stacked"] .hero-right { border-left: none; border-top: var(--bd) solid var(--line); }
+.hero-left .eyebrow { margin-bottom: 26px; }
+.hero h1 {
+  font-size: clamp(48px, 7vw, 104px); line-height: 0.9; letter-spacing: -0.045em; font-weight: 900;
+  max-width: 11ch;
+}
+.hero h1 .hl { position: relative; white-space: nowrap; display: inline-block; isolation: isolate; }
+.hero h1 .hl::before {
+  content: ""; position: absolute; left: -4px; right: -4px; top: 14%; bottom: 12%; z-index: -1;
+  background: var(--accent); transform: rotate(-1.4deg);
+}
+.hero h1 .out { color: var(--ink); }
+.hero h1 .arr { font-size: 0.42em; vertical-align: super; }
+.hero-sub { margin-top: 26px; font-size: clamp(16px,1.6vw,19px); line-height: 1.55; max-width: 44ch; color: var(--ink-soft); font-weight: 500; }
+.hero-cta { margin-top: 32px; display: flex; gap: 13px; flex-wrap: wrap; }
+.hero-meta { margin-top: 22px; display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: var(--ink-soft); font-weight: 600; }
+.hero-meta span { display: inline-flex; align-items: center; gap: 7px; }
+.hero-meta b { color: var(--accent-deep); }
+
+/* hero product-shot slot + playful cluster */
+.shot-wrap { position: relative; width: 100%; max-width: 460px; }
+.shot {
+  width: 100%; aspect-ratio: 4/3; border: var(--bd) solid var(--ink); border-radius: 18px;
+  box-shadow: 7px 7px 0 0 var(--ink); overflow: hidden; background: var(--paper);
+}
+.shot image-slot { width: 100%; height: 100%; }
+.cluster-pill, .cluster-sq, .cluster-circ, .cluster-tab {
+  position: absolute; border: var(--bd) solid var(--ink); box-shadow: 4px 4px 0 0 var(--ink); z-index: 4;
+}
+.cluster-pill { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; background: var(--accent); font-family: var(--mono); font-weight: 700; font-size: 13px; }
+.cluster-pill.p2 { background: var(--pop-1); color: var(--paper); }
+.cluster-sq { width: 56px; height: 56px; border-radius: 10px; background:
+  repeating-conic-gradient(var(--ink) 0 25%, var(--paper) 0 50%) 0 0 / 28px 28px; }
+.cluster-circ { width: 54px; height: 54px; border-radius: 50%; background: var(--pop-2); }
+.cluster-tab { background: var(--paper); border-radius: 9px; padding: 8px 12px; font-family: var(--mono); font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; }
+.cluster-tab .d { width: 8px; height: 8px; border-radius: 50%; }
+.c-tl { top: -22px; left: -26px; transform: rotate(-7deg); }
+.c-tr { top: -28px; right: -18px; transform: rotate(6deg); }
+.c-bl { bottom: -24px; left: -30px; transform: rotate(5deg); }
+.c-br { bottom: -18px; right: -26px; transform: rotate(-6deg); }
+.c-ml { top: 42%; left: -44px; transform: rotate(-9deg); }
+@media (max-width: 920px){ .hero { grid-template-columns: 1fr; } .hero-right { border-left: none; border-top: var(--bd) solid var(--line); } }
+@media (max-width: 520px){ .c-ml, .c-tr { display: none; } }
+
+/* ============ SOURCE ROW ============ */
+.sources { display: flex; align-items: center; gap: 0; overflow: hidden; }
+.sources .lbl { flex: none; padding: 18px 24px; border-right: var(--bd) solid var(--line); font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); white-space: nowrap; background: var(--bg); z-index: 2; }
+.src-track { display: flex; gap: 38px; align-items: center; white-space: nowrap; animation: scroll-src 30s linear infinite; padding: 0 30px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 90%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 90%, transparent 100%); }
+.sources:hover .src-track { animation-play-state: paused; }
+.src-track .s { display: inline-flex; align-items: center; gap: 9px; font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+.src-track .s .d { width: 9px; height: 9px; border-radius: 50%; }
+@keyframes scroll-src { to { transform: translateX(-50%); } }
+
+/* ============ PROBLEM (ideas die between tabs) ============ */
+.problem { display: grid; grid-template-columns: 0.95fr 1.05fr; min-height: 560px; }
+.problem-left { padding: clamp(40px,5vw,76px) clamp(24px,4vw,56px); display: flex; flex-direction: column; justify-content: center; }
+.problem-left h2 { font-size: clamp(40px,6vw,82px); line-height: 0.92; letter-spacing: -0.04em; font-weight: 900; margin-top: 22px; }
+.problem-left p { margin-top: 26px; font-size: clamp(16px,1.6vw,19px); line-height: 1.6; max-width: 36ch; color: var(--ink-soft); font-weight: 500; }
+/* mock browser — click references to save them to a board (the Pullhub way) */
+.problem-right { border-left: var(--bd) solid var(--line); position: relative; overflow: hidden; display: grid; place-items: center; padding: clamp(18px,2.6vw,32px); }
+.savewin {
+  width: 100%; max-width: 480px; background: var(--paper);
+  border: var(--bd) solid var(--ink); border-radius: 14px;
+  box-shadow: 7px 7px 0 0 var(--ink); overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.savewin-bar { display: flex; align-items: center; gap: 8px; padding: 11px 14px; border-bottom: var(--bd) solid var(--ink); }
+.sw-dot { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--ink); flex: none; }
+.sw-dot:nth-child(1){ background: var(--pop-3); }
+.sw-dot:nth-child(2){ background: var(--accent); }
+.sw-dot:nth-child(3){ background: oklch(0.7 0.16 150); }
+.savewin-addr { flex: 1; margin: 0 4px; font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--ink-soft); background: var(--bg); border: 1.5px solid var(--ink); border-radius: 999px; padding: 5px 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.savewin-tag { flex: none; font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.04em; color: var(--ink); background: var(--accent); border: 1.5px solid var(--ink); border-radius: 6px; padding: 4px 8px; white-space: nowrap; }
+.savewin-body { padding: 15px; background: radial-gradient(circle at 1px 1px, oklch(0.2 0.01 65 / 0.06) 1px, transparent 0) 0 0 / 18px 18px; }
+.ref-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.ref-tile { position: relative; aspect-ratio: 4/5; border: var(--bd) solid var(--ink); border-radius: 9px; overflow: hidden; cursor: pointer; padding: 0; background: var(--paper); transition: transform .14s, box-shadow .14s; }
+.ref-tile:hover { transform: translateY(-2px); box-shadow: 3px 4px 0 0 var(--ink); }
+.ref-tile .save-pill { position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%) translateY(5px); opacity: 0; transition: opacity .14s, transform .14s; font-family: var(--mono); font-size: 9.5px; font-weight: 700; color: var(--ink); background: var(--accent); border: 1.5px solid var(--ink); border-radius: 999px; padding: 4px 9px; white-space: nowrap; pointer-events: none; }
+.ref-tile:hover .save-pill { opacity: 1; transform: translateX(-50%) translateY(0); }
+.ref-tile .check { position: absolute; inset: 0; display: none; place-items: center; background: oklch(0.04 0 0 / 0.42); }
+.ref-tile .check b { width: 34px; height: 34px; border-radius: 50%; background: var(--accent); border: var(--bd) solid var(--ink); display: grid; place-items: center; font-size: 18px; color: var(--ink); }
+.ref-tile.is-saved { box-shadow: inset 0 0 0 3px var(--accent), 4px 5px 0 0 var(--ink); }
+.ref-tile.is-saved .check { display: grid; animation: pop .25s cubic-bezier(.3,1.4,.5,1); }
+.ref-tile.is-saved .save-pill { display: none; }
+@keyframes pop { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+/* saved-to board bar */
+.save-board { display: flex; align-items: center; gap: 11px; padding: 12px 14px; border-top: var(--bd) solid var(--ink); }
+.sb-star { width: 24px; height: 24px; border-radius: 6px; background: var(--accent); border: 1.5px solid var(--ink); display: grid; place-items: center; font-size: 13px; line-height: 1; flex: none; }
+.sb-name { font-weight: 800; font-size: 14px; color: var(--ink); }
+.sb-dots { display: flex; gap: 4px; margin-left: 4px; }
+.sb-dots i { width: 9px; height: 9px; border-radius: 3px; border: 1.5px solid var(--ink); background: var(--bg); transition: background .2s; }
+.sb-dots i.on { background: var(--accent); }
+.sb-count { margin-left: auto; font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--ink); background: var(--bg); border: 1.5px solid var(--ink); border-radius: 999px; padding: 4px 11px; flex: none; }
+
+/* PULLHUB_INTERACTION_V2 START: click references into a live board */
+.source-tabs { display: flex; gap: 6px; padding: 11px 14px 0; overflow: hidden; }
+.source-tabs span { flex: 1; min-width: 0; font-family: var(--mono); font-size: 10px; font-weight: 700; color: var(--ink-soft); border: 1.5px solid var(--ink); border-bottom-width: 3px; border-radius: 8px 8px 4px 4px; background: var(--paper); padding: 5px 7px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: background .18s, transform .18s, color .18s; }
+.source-tabs span.is-active { color: var(--ink); background: var(--accent); transform: translateY(-2px); box-shadow: 2px 2px 0 0 var(--ink); }
+.savewin-addr .tab-cycle { display: inline-block; min-width: 0; transition: opacity .18s; }
+.savewin.is-switching .tab-cycle { opacity: .35; }
+.savewin-tag { animation: pullhub-on-pulse 2.8s ease-in-out infinite; }
+.ref-tile.is-saved { transform: translateY(-2px); }
+.ref-tile.is-saved::before { content: "SAVED"; position: absolute; top: 8px; left: 8px; z-index: 2; font-family: var(--mono); font-size: 9px; font-weight: 700; color: var(--ink); background: var(--accent); border: 1.5px solid var(--ink); border-radius: 999px; padding: 3px 7px; }
+.sb-count { transition: transform .16s, background .16s; }
+.save-board { flex-wrap: wrap; }
+.board-preview { flex-basis: 100%; display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 6px; min-height: 42px; }
+.board-preview::before { content: "Click a reference above"; grid-column: 1 / -1; display: grid; place-items: center; min-height: 38px; font-family: var(--mono); font-size: 10.5px; font-weight: 700; color: var(--ink-soft); border: 1.5px dashed var(--ink); border-radius: 7px; background: var(--bg); }
+.board-preview.has-items::before { display: none; }
+.board-thumb { min-height: 38px; border: 1.5px solid var(--ink); border-radius: 7px; box-shadow: 2px 2px 0 0 var(--ink); animation: pullhub-thumb-in .22s cubic-bezier(.3,1.4,.5,1); }
+.save-board:has(.sb-dots i.on) .sb-count { background: var(--accent); transform: translateY(-1px); }
+@keyframes pullhub-on-pulse {
+  0%, 100% { transform: translateY(0); box-shadow: none; }
+  50% { transform: translateY(-1px); box-shadow: 2px 2px 0 0 var(--ink); }
+}
+@keyframes pullhub-thumb-in {
+  from { opacity: 0; transform: translateY(-8px) scale(.82); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .savewin-tag,
+  .board-thumb { animation: none; }
+}
+/* PULLHUB_INTERACTION_V2 END */
+@media (max-width: 920px){ .problem { grid-template-columns: 1fr; } .problem-right { border-left: none; border-top: var(--bd) solid var(--line); min-height: 440px; } }
+
+/* ============ HOW IT WORKS ============ */
+.works-head { padding: clamp(48px,5.5vw,86px) clamp(24px,4vw,56px); display: flex; flex-direction: column; }
+.works-head .kicker { margin-bottom: clamp(22px,2.6vw,34px); }
+.works-head .wh-row { display: grid; grid-template-columns: minmax(0,1.25fr) minmax(0,1fr); gap: clamp(24px,4vw,64px); align-items: end; max-width: 1080px; }
+.works-head h2 { font-size: clamp(34px,5vw,62px); line-height: 0.96; letter-spacing: -0.035em; font-weight: 900; }
+.works-head p { max-width: 40ch; color: var(--ink-soft); font-weight: 500; font-size: 16.5px; line-height: 1.55; padding-bottom: 8px; }
+@media (max-width: 720px){ .works-head .wh-row { grid-template-columns: 1fr; gap: 16px; align-items: start; } }
+
+.step-row { display: grid; grid-template-columns: 0.74fr 1.26fr; align-items: stretch; }
+.step-row:nth-child(even) .step-copy { order: 2; border-left: var(--bd) solid var(--line); border-right: none; }
+.step-copy { padding: clamp(40px,4.6vw,68px); display: flex; flex-direction: column; justify-content: center; border-right: var(--bd) solid var(--line); }
+.step-num { font-family: var(--mono); font-weight: 700; font-size: 14px; color: var(--accent-deep); display: inline-flex; align-items: center; gap: 10px; }
+.step-num .n { background: var(--accent); color: var(--ink); border: var(--bd) solid var(--ink); border-radius: 7px; padding: 3px 9px; }
+.step-copy h3 { font-size: clamp(28px,3.4vw,42px); line-height: 1.0; letter-spacing: -0.03em; font-weight: 900; margin-top: 22px; }
+.step-copy p { margin-top: 18px; color: var(--ink-soft); font-weight: 500; font-size: 16.5px; line-height: 1.6; max-width: 42ch; }
+.step-chips { margin-top: 28px; display: flex; gap: 9px; flex-wrap: wrap; }
+.step-chips .c { font-family: var(--mono); font-size: 12.5px; font-weight: 700; border: var(--bd) solid var(--ink); border-radius: 8px; padding: 7px 11px; background: var(--paper); }
+.step-media { padding: clamp(14px,1.8vw,26px); display: grid; place-items: center; background:
+  radial-gradient(circle at 1px 1px, oklch(0.2 0.01 65 / 0.06) 1px, transparent 0) 0 0 / 22px 22px; }
+.gif-slot {
+  width: 100%; max-width: none; aspect-ratio: 16/10; border: var(--bd) solid var(--ink);
+  border-radius: 14px; box-shadow: 7px 7px 0 0 var(--ink); overflow: hidden; background: var(--paper); position: relative;
+}
+.gif-slot::after {
+  content: "● REC"; position: absolute; top: 10px; left: 10px; z-index: 3; pointer-events: none;
+  font-family: var(--mono); font-size: 10px; font-weight: 700; color: var(--pop-3);
+  background: var(--ink); padding: 3px 7px; border-radius: 5px;
+}
+.gif-slot image-slot { width: 100%; height: 100%; }
+.step-media .gif-slot { aspect-ratio: 3/4; width: 350px; max-width: 100%; }
+@media (max-width: 860px){ .step-row, .step-row:nth-child(even) .step-copy { grid-template-columns: 1fr; order: 0; border-left: none; }
+  .step-copy { border-right: none; border-bottom: var(--bd) solid var(--line); } }
+
+/* extra tools band */
+.tools { display: grid; grid-template-columns: 1fr 1fr; }
+.tool { padding: clamp(30px,3.5vw,48px); display: flex; flex-direction: column; }
+.tool + .tool { border-left: var(--bd) solid var(--line); }
+.tool h4 { font-size: clamp(22px,2.4vw,30px); font-weight: 900; letter-spacing: -0.02em; }
+.tool p { margin-top: 10px; color: var(--ink-soft); font-weight: 500; font-size: 15.5px; line-height: 1.5; max-width: 38ch; min-height: 4.5em; }
+.tool .gif-slot { margin-top: 26px; aspect-ratio: 3/4; width: 100%; max-width: 300px; box-sizing: border-box; }
+@media (max-width: 760px){ .tools { grid-template-columns: 1fr; } .tool + .tool { border-left: none; border-top: var(--bd) solid var(--line); } }
+
+/* ============ HOW IT WORKS — designed step & tool mocks ============ */
+.mock { width: 100%; max-width: 560px; background: var(--paper); border: var(--bd) solid var(--ink); border-radius: 14px; box-shadow: 8px 8px 0 0 var(--ink); overflow: hidden; }
+.mock-bar { display: flex; align-items: center; gap: 7px; padding: 10px 13px; border-bottom: var(--bd) solid var(--ink); }
+.mock-bar .dot { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--ink); flex: none; }
+.mock-bar .dot.y { background: var(--accent); } .mock-bar .dot.p { background: var(--pop-3); } .mock-bar .dot.g { background: oklch(0.7 0.16 150); }
+.mock-bar .ttl { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--ink-soft); margin-left: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mock-bar .pill { margin-left: auto; font-family: var(--mono); font-size: 10px; font-weight: 700; color: var(--ink); background: var(--accent); border: 1.5px solid var(--ink); border-radius: 6px; padding: 3px 8px; white-space: nowrap; flex: none; }
+
+/* 01 — area capture */
+.pull-mock { max-width: 600px; }
+.pull-canvas { position: relative; height: 360px; overflow: hidden; background: conic-gradient(from 35deg, oklch(0.72 0.17 45), oklch(0.62 0.16 350), oklch(0.56 0.13 250), oklch(0.68 0.15 155), oklch(0.72 0.17 45)); }
+.pull-canvas::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 1px 1px, oklch(1 0 0 / 0.13) 1px, transparent 0) 0 0 / 16px 16px; }
+.marquee { position: absolute; left: 21%; top: 19%; width: 52%; height: 54%; border: 2.5px dashed var(--accent); box-shadow: 0 0 0 9999px oklch(0.06 0 0 / 0.5); border-radius: 4px; cursor: grab; touch-action: none; }
+.marquee:active { cursor: grabbing; }
+.marquee .h { position: absolute; width: 11px; height: 11px; background: var(--accent); border: 2px solid var(--ink); border-radius: 2px; }
+.marquee .h.tl { left: -7px; top: -7px; } .marquee .h.tr { right: -7px; top: -7px; } .marquee .h.bl { left: -7px; bottom: -7px; } .marquee .h.br { right: -7px; bottom: -7px; }
+.marquee .h.tl, .marquee .h.br { cursor: nwse-resize; }
+.marquee .h.tr, .marquee .h.bl { cursor: nesw-resize; }
+.marquee .dims { position: absolute; left: 50%; bottom: -14px; transform: translateX(-50%); font-family: var(--mono); font-size: 10px; font-weight: 700; color: var(--ink); background: var(--accent); border: 1.5px solid var(--ink); border-radius: 5px; padding: 2px 7px; white-space: nowrap; }
+.pull-chip { position: absolute; right: 15px; bottom: 15px; z-index: 3; font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--ink); background: var(--paper); border: var(--bd) solid var(--ink); border-radius: 999px; padding: 8px 14px; box-shadow: 3px 3px 0 0 var(--ink); }
+
+/* 02 — save to a board */
+.save-mock { max-width: 430px; }
+.step-row--save { grid-template-columns: 0.98fr 1.02fr; }
+@media (max-width: 860px){ .step-row--save { grid-template-columns: 1fr; } }
+.save-head { display: flex; align-items: center; gap: 12px; padding: 17px 20px; border-bottom: var(--bd) solid var(--ink); }
+.save-head .thumb { width: 48px; height: 48px; border-radius: 9px; border: var(--bd) solid var(--ink); flex: none; background: repeating-linear-gradient(45deg, oklch(0.72 0.17 45) 0 8px, oklch(0.8 0.13 55) 8px 16px); }
+.save-head .thumb.logo { background: var(--paper); display: grid; place-items: center; padding: 6px; }
+.save-head .thumb.logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.save-head .t { font-weight: 800; font-size: 16px; }
+.save-head .s { font-family: var(--mono); font-size: 11px; color: var(--ink-soft); font-weight: 700; margin-top: 2px; }
+.board-pick { padding: 12px; display: flex; flex-direction: column; gap: 8px; background: radial-gradient(circle at 1px 1px, oklch(0.2 0.01 65 / 0.06) 1px, transparent 0) 0 0 / 18px 18px; }
+.bp { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 14px; color: var(--ink); background: var(--paper); border: var(--bd) solid var(--ink); border-radius: 10px; padding: 11px 13px; text-align: left; cursor: pointer; }
+.bp .d { width: 13px; height: 13px; border-radius: 4px; border: 1.5px solid var(--ink); flex: none; }
+.bp-name { min-width: 0; outline: none; border-radius: 4px; padding: 1px 3px; }
+.bp-name:focus { background: var(--paper); box-shadow: inset 0 0 0 1.5px var(--ink); }
+.bp em { margin-left: auto; font-family: var(--mono); font-size: 12px; font-style: normal; color: var(--ink-soft); }
+.bp .ck { margin-left: 9px; font-weight: 900; color: var(--ink); }
+.bp.is-on { background: var(--accent); box-shadow: 4px 4px 0 0 var(--ink); }
+.bp.is-on em { color: var(--ink); }
+.bp.add { justify-content: center; color: var(--ink-soft); border-style: dashed; font-family: var(--mono); font-size: 12.5px; }
+
+/* 03 — push to Google Slides */
+.slide-mock { max-width: 620px; }
+.slide-body { display: grid; grid-template-columns: 72px 1fr; }
+.filmstrip { border-right: var(--bd) solid var(--ink); padding: 12px 11px; display: flex; flex-direction: column; gap: 8px; background: var(--bg); }
+.filmstrip i { display: block; aspect-ratio: 16/10; border: 2px solid var(--ink); border-radius: 4px; background: var(--paper); }
+.filmstrip i.on { box-shadow: 0 0 0 2.5px var(--accent); }
+.slide-canvas { padding: 16px; display: grid; place-items: center; background: radial-gradient(circle at 1px 1px, oklch(0.2 0.01 65 / 0.06) 1px, transparent 0) 0 0 / 18px 18px; }
+.slide-frame { width: 100%; aspect-ratio: 16/9; background: var(--paper); border: var(--bd) solid var(--ink); border-radius: 8px; box-shadow: 5px 5px 0 0 var(--ink); padding: 12px; display: grid; grid-template-columns: repeat(3,1fr); gap: 9px; }
+.slide-frame span { border-radius: 5px; border: 2px solid var(--ink); }
+
+/* PULLHUB_INTERACTION_V2 START: click push before slide images appear */
+.slide-push-btn { cursor: pointer; box-shadow: 2px 2px 0 0 var(--ink); transition: transform .12s, background .16s; }
+.slide-push-btn:hover { transform: translateY(-1px); }
+.slide-push-btn:active { transform: translateY(1px); box-shadow: none; }
+.slide-mock:not(.is-pushed) .slide-frame span { opacity: 0; transform: translateY(10px) scale(.88); }
+.slide-frame span { transition: opacity .24s, transform .28s; transition-delay: calc(var(--i, 0) * .08s); }
+.slide-frame span:nth-child(1){ --i: 0; }
+.slide-frame span:nth-child(2){ --i: 1; }
+.slide-frame span:nth-child(3){ --i: 2; }
+.slide-frame span:nth-child(4){ --i: 3; }
+.slide-frame span:nth-child(5){ --i: 4; }
+.slide-frame span:nth-child(6){ --i: 5; }
+.slide-mock.is-pushed .slide-frame span { opacity: 1; transform: translateY(0) scale(1); }
+.slide-mock.is-pushed .slide-push-btn { background: oklch(0.7 0.16 150); }
+.slide-mock.is-pushed .filmstrip i.on { box-shadow: 0 0 0 2.5px oklch(0.7 0.16 150); }
+@media (prefers-reduced-motion: reduce) {
+  .slide-frame span { transition: none; transform: none; }
+}
+/* PULLHUB_INTERACTION_V2 END */
+
+/* Share & collaborate */
+.share-mock { max-width: 420px; }
+.share-top { display: flex; align-items: center; gap: 12px; padding: 15px 18px; border-bottom: var(--bd) solid var(--ink); }
+.share-top .ic { width: 42px; height: 42px; border-radius: 9px; border: var(--bd) solid var(--ink); background: var(--accent); display: grid; place-items: center; font-size: 18px; flex: none; }
+.share-top .t { font-weight: 800; font-size: 15px; }
+.share-top .s { font-family: var(--mono); font-size: 11px; color: var(--ink-soft); font-weight: 700; margin-top: 2px; }
+.link-row { display: flex; gap: 8px; padding: 15px 18px 18px; }
+.link-row .url { flex: 1; font-family: var(--mono); font-size: 12.5px; font-weight: 700; color: var(--ink); background: var(--bg); border: var(--bd) solid var(--ink); border-radius: 9px; padding: 9px 12px; display: flex; align-items: center; overflow: hidden; white-space: nowrap; }
+.link-row .cp { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--ink); background: var(--accent); border: var(--bd) solid var(--ink); border-radius: 9px; padding: 9px 14px; box-shadow: 3px 3px 0 0 var(--ink); white-space: nowrap; flex: none; }
+.collab { display: flex; align-items: center; padding: 8px 18px 18px; }
+.collab .av { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--ink); display: grid; place-items: center; font-family: var(--mono); font-size: 10.5px; font-weight: 700; color: var(--ink); margin-left: -8px; }
+.collab .av:first-child { margin-left: 0; }
+.collab .lbl { margin-left: 12px; font-family: var(--mono); font-size: 12px; color: var(--ink-soft); font-weight: 700; }
+
+/* Export as ZIP */
+.zip-mock { max-width: 420px; }
+.zip-head { display: flex; align-items: center; gap: 12px; padding: 15px 18px; border-bottom: var(--bd) solid var(--ink); }
+.zip-head .ico { width: 44px; height: 44px; border-radius: 9px; border: var(--bd) solid var(--ink); background: var(--ink); color: var(--accent); display: grid; place-items: center; font-family: var(--mono); font-weight: 700; font-size: 12px; flex: none; }
+.zip-head .t { font-weight: 800; font-size: 15px; }
+.zip-head .s { font-family: var(--mono); font-size: 11px; color: var(--ink-soft); font-weight: 700; margin-top: 2px; }
+.zip-list { padding: 13px 16px 6px; display: flex; flex-direction: column; gap: 8px; }
+.zr { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--ink); }
+.zr .zt { width: 20px; height: 20px; border-radius: 4px; border: 1.5px solid var(--ink); flex: none; }
+.zr em { margin-left: auto; font-style: normal; color: var(--ink-soft); }
+.zip-dl { margin: 6px 16px 16px; font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--ink); background: var(--accent); border: var(--bd) solid var(--ink); border-radius: 10px; padding: 11px; box-shadow: 4px 4px 0 0 var(--ink); display: flex; align-items: center; justify-content: center; gap: 6px; }
+
+.tool .mock { margin-top: 24px; }
+
+/* ============ BOARDS (dark) ============ */
+.boards { background: var(--ink); color: var(--bg); display: grid; grid-template-columns: 1.05fr 0.95fr; }
+.boards-copy { padding: clamp(44px,5vw,80px) clamp(24px,4vw,56px); display: flex; flex-direction: column; justify-content: center; }
+.boards-copy .kicker { color: var(--accent); }
+.boards-copy h2 { font-size: clamp(34px,4.6vw,58px); line-height: 0.98; letter-spacing: -0.035em; font-weight: 900; margin-top: 18px; }
+.boards-copy h2 em { color: var(--accent); font-style: normal; }
+.boards-copy p { margin-top: 20px; color: oklch(0.82 0.01 85); font-weight: 500; font-size: 16.5px; line-height: 1.55; max-width: 40ch; }
+.boards-list { margin-top: 26px; display: flex; flex-direction: column; gap: 13px; }
+.boards-list .li { display: flex; align-items: center; gap: 13px; font-weight: 600; font-size: 16px; }
+.boards-list .li b { width: 13px; height: 13px; border-radius: 4px; flex: none; }
+.boards-stage { border-left: var(--bd) solid oklch(0.35 0.01 85); position: relative; overflow: hidden; min-height: 540px; }
+.board-card { --bc: var(--accent); position: absolute; width: 274px; height: 228px; border: var(--bd) solid var(--ink); border-radius: 15px; background: var(--paper); box-shadow: 8px 8px 0 0 oklch(0.04 0 0); padding: 13px; display: flex; flex-direction: column; gap: 8px; }
+.board-card .bc-head { display: flex; align-items: center; justify-content: space-between; }
+.board-card .bc-name { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 14.5px; color: var(--ink); }
+.board-card .swatch { width: 13px; height: 13px; border-radius: 4px; border: var(--bd) solid var(--ink); background: var(--bc); }
+.board-card .count { font-family: var(--mono); font-size: 11px; color: var(--ink-soft); font-weight: 700; }
+.board-card .thumbs { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; flex: 1; min-height: 64px; }
+.board-card .thumbs i { border-radius: 6px; border: var(--bd) solid var(--ink); background: repeating-linear-gradient(45deg, oklch(0.88 0.02 85) 0 6px, oklch(0.93 0.012 85) 6px 12px); }
+.board-card { cursor: grab; touch-action: none; user-select: none; transition: box-shadow .12s; }
+.board-card:active { cursor: grabbing; }
+.drag-hint { position: absolute; top: 20px; right: 22px; z-index: 8; font-family: var(--mono); font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em; color: var(--ink); background: var(--accent); border: var(--bd) solid var(--ink); border-radius: 12px; padding: 9px 14px; display: inline-flex; align-items: center; gap: 9px; box-shadow: 3px 3px 0 0 oklch(0.04 0 0); pointer-events: none; max-width: 230px; line-height: 1.35; }
+.drag-hint .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink); animation: pulse 1.4s ease-in-out infinite; flex: none; }
+.tidy-btn { position: absolute; bottom: 22px; right: 22px; z-index: 9; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.04em; color: var(--ink); background: var(--accent); border: var(--bd) solid var(--ink); border-radius: 10px; padding: 10px 16px; cursor: pointer; box-shadow: 3px 3px 0 0 oklch(0.04 0 0); transition: transform .12s, box-shadow .12s; }
+.tidy-btn:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 0 oklch(0.04 0 0); }
+.tidy-btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 0 oklch(0.04 0 0); }
+/* per-board actions: recolor · share link · push to Slides */
+.bc-actions { margin-top: 1px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.bc-color { display: flex; gap: 5px; }
+.bc-color button { width: 16px; height: 16px; border-radius: 5px; border: 2px solid var(--ink); cursor: pointer; padding: 0; transition: transform .1s; }
+.bc-color button:hover { transform: scale(1.16); }
+.bc-color button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--paper), 0 0 0 3.5px var(--ink); }
+.bc-do { display: flex; gap: 6px; }
+.bc-btn { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.01em; color: var(--ink); border: 2px solid var(--ink); border-radius: 7px; background: var(--bg); padding: 5px 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; transition: background .12s, transform .1s; }
+.bc-btn:hover { background: color-mix(in oklch, var(--accent) 45%, var(--bg)); }
+.bc-btn:active { transform: translateY(1px); }
+.bc-btn.is-done { background: var(--accent); }
+.board-toast { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%) translateY(8px); z-index: 12; opacity: 0; pointer-events: none; font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--bg); background: var(--ink); border: 2px solid var(--accent); border-radius: 10px; padding: 9px 15px; transition: opacity .2s, transform .2s; white-space: nowrap; box-shadow: 4px 4px 0 0 oklch(0.04 0 0); }
+.board-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+@keyframes pulse { 0%,100%{ opacity: 1; } 50%{ opacity: 0.3; } }
+.board-card.c1 { --bc: var(--accent); top: 38px; left: 6%; transform: rotate(-7deg); z-index: 3; }
+.board-card.c2 { --bc: var(--pop-2); top: 156px; left: 34%; transform: rotate(5deg); z-index: 2; }
+.board-card.c3 { --bc: var(--pop-1); top: 274px; left: 12%; transform: rotate(-3deg); z-index: 1; }
+.board-card .thumbs i:nth-child(odd){ background: repeating-linear-gradient(45deg, color-mix(in oklch, var(--bc) 58%, oklch(0.98 0 0)) 0 6px, color-mix(in oklch, var(--bc) 26%, oklch(0.98 0 0)) 6px 12px); }
+@media (max-width: 920px){ .boards { grid-template-columns: 1fr; } .boards-stage { border-left: none; border-top: var(--bd) solid oklch(0.35 0.01 85); min-height: 540px; } }
+@media (max-width: 480px){ .board-card { width: 220px; height: 170px; } .board-card.c2 { left: 26%; } }
+
+/* ============ PRICING ============ */
+.pricing-head { padding: clamp(40px,5vw,72px) clamp(24px,4vw,56px) 0; }
+.pricing-head h2 { font-size: clamp(32px,4.6vw,56px); line-height: 0.98; letter-spacing: -0.035em; font-weight: 900; max-width: 18ch; }
+.pricing-head p { margin-top: 16px; max-width: 44ch; color: var(--ink-soft); font-weight: 500; font-size: 16.5px; line-height: 1.5; }
+.plans { display: grid; grid-template-columns: 1fr 1fr; padding: clamp(28px,4vw,48px) clamp(24px,4vw,56px) clamp(40px,5vw,72px); gap: 22px; }
+.plan { border: var(--bd) solid var(--ink); border-radius: 20px; padding: 32px 30px 34px; background: var(--paper); box-shadow: 7px 7px 0 0 var(--ink); position: relative; display: flex; flex-direction: column; }
+.plan.pro { background: var(--accent); }
+.plan .pname { font-family: var(--mono); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: var(--ink-soft); }
+.plan.pro .pname { color: var(--accent-ink); }
+.plan .price { margin-top: 12px; font-size: 56px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; }
+.plan .price small { font-size: 17px; font-weight: 600; color: var(--ink-soft); }
+.plan.pro .price small { color: var(--accent-ink); }
+.plan .pnote { margin-top: 8px; font-size: 13.5px; color: var(--ink-soft); font-weight: 600; }
+.plan.pro .pnote { color: var(--accent-ink); }
+.plan ul { list-style: none; margin-top: 22px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.plan li { display: flex; gap: 11px; font-weight: 600; font-size: 15.5px; }
+.plan li .tick { font-weight: 900; flex: none; }
+.plan .btn { margin-top: 26px; width: 100%; justify-content: center; }
+.plan.pro .btn { box-shadow: 4px 4px 0 0 var(--ink); }
+.plan .flag { position: absolute; top: -15px; right: 24px; background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 12px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transform: rotate(3deg); }
+@media (max-width: 720px){ .plans { grid-template-columns: 1fr; } }
+
+/* ============ FINAL CTA + FOOTER ============ */
+.cta-band { position: relative; overflow: hidden; text-align: center; padding: clamp(56px,7vw,104px) 24px; }
+.cta-band h2 { font-size: clamp(40px,7vw,96px); line-height: 0.92; letter-spacing: -0.045em; font-weight: 900; }
+.cta-band h2 em { color: var(--ink); font-style: normal; position: relative; isolation: isolate; }
+.cta-band h2 em::before { content:""; position:absolute; left:-4px; right:-4px; top:18%; bottom:14%; background: var(--accent); z-index:-1; transform: rotate(-1.2deg); }
+.cta-band .btn { margin-top: 30px; font-size: 17px; padding: 16px 28px; }
+.hazard-strip { height: 22px; }
+
+/* ============ SUPPORT ============ */
+.support { display: flex; align-items: center; justify-content: space-between; gap: 20px 40px; flex-wrap: wrap; padding: clamp(34px,4.5vw,60px) clamp(24px,4vw,56px); }
+.support-l { max-width: 52ch; }
+.support-l h3 { font-size: clamp(28px,3.4vw,44px); font-weight: 900; letter-spacing: -0.03em; line-height: 1; margin-top: 14px; }
+.support-l p { margin-top: 12px; color: var(--ink-soft); font-weight: 500; font-size: 16px; line-height: 1.5; }
+.support-mail { font-family: var(--mono); white-space: nowrap; }
+
+footer { padding: clamp(40px,4vw,56px) clamp(24px,4vw,56px) 36px; }
+.foot-top { display: flex; justify-content: space-between; gap: 36px; flex-wrap: wrap; }
+.foot-brand { max-width: 280px; }
+.foot-brand p { margin-top: 14px; color: var(--ink-soft); font-size: 14px; line-height: 1.55; font-weight: 500; }
+.foot-cols { display: flex; gap: 60px; flex-wrap: wrap; }
+.foot-col h5 { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 13px; }
+.foot-col a { display: block; font-weight: 600; font-size: 14.5px; margin-bottom: 9px; }
+.foot-col a:hover { color: var(--accent-deep); }
+.foot-legal { margin-top: 42px; padding-top: 20px; border-top: var(--bd) solid oklch(0.2 0.01 65 / 0.14); display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--ink-soft); font-weight: 600; }
+
+/* ============================================================
+   POSTER RENDER ZONE  (merges the image-1 reference aesthetic)
+   grid paper · pixel/glitch type · technical annotations ·
+   registration marks · blue + orange pops · render slot center
+   ============================================================ */
+:root {
+  --poster-blue: oklch(0.50 0.22 268);
+  --poster-orange: oklch(0.68 0.18 47);
+  --poster-grid: oklch(0.20 0.01 65 / 0.07);
+}
+.hero-right { background: var(--bg); position: relative; overflow: visible; padding: 0; min-height: 560px; border-left: none; display: grid; place-items: center; }
+/* product illustration — sits in the right column, nudged left to overlap the headline column a touch */
+.hero-art { display: block; width: min(116%, 612px); height: auto; transform: translateX(-14%); pointer-events: none; filter: drop-shadow(0 22px 38px oklch(0.25 0.05 75 / 0.20)); }
+@media (max-width: 920px){ .hero-right { min-height: 0; } .hero-art { height: auto; width: 92%; max-width: 92%; transform: none; margin: 18px auto 30px; } }
+
+/* single hero image with graphic elements layered IN FRONT */
+.hero-canvas { position: relative; width: 100%; max-width: 500px; aspect-ratio: 4/5; }
+.hero-img { position: absolute; inset: 0; border: var(--bd) solid var(--ink); border-radius: 6px; overflow: hidden; background: var(--paper); box-shadow: 7px 7px 0 0 var(--ink); }
+.hero-img image-slot { width: 100%; height: 100%; }
+.ov { position: absolute; z-index: 5; }
+.ov-reg { top: 14px; left: 14px; right: 14px; display: flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--ink);
+  background: color-mix(in oklch, var(--paper) 84%, transparent); backdrop-filter: blur(3px);
+  padding: 7px 11px; border: 1.5px solid var(--ink); border-radius: 4px; }
+.ov-reg .ln { flex: 1; height: 0; border-top: 1.5px solid var(--ink); }
+.ov-reg .yr { color: var(--ink-soft); }
+.ov-pixel { left: -16px; bottom: 20px; white-space: nowrap; font-family: "Pixelify Sans", monospace; font-weight: 700;
+  font-size: clamp(20px, 2.6vw, 30px); color: var(--ink); background: var(--accent);
+  border: var(--bd) solid var(--ink); padding: 5px 13px; box-shadow: 4px 4px 0 0 var(--ink); transform: rotate(-2deg); }
+.ov-pixel .blue { color: var(--poster-blue); }
+.ov-tags { bottom: 16px; right: 14px; display: flex; gap: 8px; }
+.ov-tags .ptag { background: color-mix(in oklch, var(--paper) 86%, transparent); backdrop-filter: blur(3px); }
+@media (max-width: 520px){ .ov-pixel { left: 0; } }
+/* corner registration ticks */
+.reg-tick { position: absolute; width: 16px; height: 16px; z-index: 4; }
+.reg-tick::before, .reg-tick::after { content: ""; position: absolute; background: var(--ink); }
+.reg-tick::before { width: 16px; height: 2px; top: 7px; }
+.reg-tick::after { width: 2px; height: 16px; left: 7px; }
+.reg-tick.tl { top: -22px; left: -22px; } .reg-tick.tr { top: -22px; right: -22px; }
+.reg-tick.bl { bottom: -22px; left: -22px; } .reg-tick.br { bottom: -22px; right: -22px; }
+/* blue circle arrow (from reference) */
+.blue-arrow {
+  position: absolute; right: -20px; top: 44%; z-index: 6;
+  width: 52px; height: 52px; border-radius: 50%; background: var(--poster-blue); color: #fff;
+  border: var(--bd) solid var(--ink); display: grid; place-items: center; font-size: 22px;
+  box-shadow: 4px 4px 0 0 var(--ink); text-decoration: none; transition: transform .12s;
+}
+.blue-arrow:hover { transform: translate(-2px,-2px); }
+/* technical mono annotations */
+.poster-tag { position: absolute; z-index: 5; font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--ink); line-height: 1.3; }
+.poster-tag.t-ref { top: -16px; right: 4px; color: var(--ink-soft); }
+.poster-tag.t-feed {
+  top: 58px; left: 14px; text-align: left; background: var(--paper);
+  border: 1.5px solid var(--ink); border-radius: 3px; padding: 5px 8px;
+}
+.poster-tag.t-feed b { color: var(--poster-orange); }
+
+/* bottom pill tags */
+.poster-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+.ptag { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  border: 1.5px solid var(--ink); border-radius: 999px; padding: 8px 16px; color: var(--ink); display: inline-flex; align-items: center; gap: 8px; }
+.ptag .bk { color: var(--poster-blue); }
+
+@media (max-width: 520px){ .poster-tag.t-feed { display: none; } .reg-tick { display: none; } }
+
+/* faint A-frame logo watermark in the dark Boards stage */
+.boards-stage::before {
+  content: ""; position: absolute; right: -40px; bottom: -50px; width: 340px; height: 340px; z-index: 0;
+  background: url("pullhub-icon.svg") center/contain no-repeat; opacity: 0.05; filter: invert(1); pointer-events: none;
+}
+
+/* <> bracket motif helper */
+.bk { font-family: var(--mono); font-weight: 700; color: var(--accent-deep); }
+.eyebrow .bk { font-size: 1.05em; }
+</style>
+<!-- Optimized from Claude standalone: preview-only wrapper and tweak panel removed. -->
+</head>
+<body>
+
+
+
+<div class="page" data-theme="caution" data-bg="cream">
+
+  <!-- NAV -->
+  <nav class="nav rule-b">
+    <div class="nav-inner pad">
+      <a class="brand" href="#"><img class="logo-mark" src="pullhub-icon.svg" alt="Pullhub">Pullhub</a>
+      <div class="nav-links">
+        <a class="l" href="#how">How it works</a>
+        <a class="l" href="#boards">Boards</a>
+        <a class="l" href="#pricing">Pricing</a>
+        <div class="nav-cta"><a class="btn btn--yellow" href="#">Add to Chrome free</a></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero rule-b" data-layout="split" data-screen-label="Hero">
+    <div class="hero-left">
+      <span class="eyebrow"><span class="bk">&lt;/&gt;</span> Chrome extension · built for creatives</span>
+      <h1>Think <span class="hl">outside</span> <span class="out">the box.<span class="arr">↗</span></span></h1>
+      <p class="hero-sub">Save references. Organize boards. Push to Slides. Pullhub turns web inspiration into presentation-ready project boards.</p>
+      <div class="hero-cta">
+        <a class="btn btn--yellow" href="#">Add to Chrome free</a>
+        <a class="btn btn--ghost" href="#how">See how it works ↓</a>
+      </div>
+      <div class="hero-meta">
+        <span><b>✓</b> Free forever plan</span>
+        <span><b>✓</b> No credit card</span>
+        <span><b>✓</b> One-click push to Slides</span>
+      </div>
+    </div>
+    <div class="hero-right" data-comment-anchor="7c1ba97e6a-div">
+      <img class="hero-art" src="assets/landing-main.png" alt="Pullhub right-click menu for pushing any image straight to a slide or board" data-comment-anchor="1646df1f4f-image-slot">
+    </div>
+  </section>
+
+  <!-- SOURCE ROW -->
+  <section class="sources rule-b" data-screen-label="Sources">
+    <span class="lbl">Pull from anywhere →</span>
+    <div class="src-track" data-comment-anchor="d881c53665-div">
+      <span class="s"><span class="d" style="background:var(--pop-3)"></span>Pinterest</span>
+      <span class="s"><span class="d" style="background:var(--pop-2)"></span>Behance</span>
+      <span class="s"><span class="d" style="background:oklch(0.6 0.18 200)"></span>Vimeo</span>
+      <span class="s"><span class="d" style="background:oklch(0.65 0.2 350)"></span>Dribbble</span>
+      <span class="s"><span class="d" style="background:var(--pop-1)"></span>Are.na</span>
+      <span class="s"><span class="d" style="background:oklch(0.6 0.2 30)"></span>Instagram</span>
+      <span class="s"><span class="d" style="background:var(--ink)"></span>Figma</span>
+      <span class="s"><span class="d" style="background:oklch(0.7 0.16 150)"></span>Unsplash</span>
+      <!-- duplicate for seamless marquee -->
+      <span class="s"><span class="d" style="background:var(--pop-3)"></span>Pinterest</span>
+      <span class="s"><span class="d" style="background:var(--pop-2)"></span>Behance</span>
+      <span class="s"><span class="d" style="background:oklch(0.6 0.18 200)"></span>Vimeo</span>
+      <span class="s"><span class="d" style="background:oklch(0.65 0.2 350)"></span>Dribbble</span>
+      <span class="s"><span class="d" style="background:var(--pop-1)"></span>Are.na</span>
+      <span class="s"><span class="d" style="background:oklch(0.6 0.2 30)"></span>Instagram</span>
+      <span class="s"><span class="d" style="background:var(--ink)"></span>Figma</span>
+      <span class="s"><span class="d" style="background:oklch(0.7 0.16 150)"></span>Unsplash</span>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problem rule-b" data-scatter="loud" data-screen-label="The problem">
+    <div class="problem-left">
+      <span class="kicker"><span class="bar" style="width:26px;height:3px;background:var(--accent);display:inline-block"></span> The problem</span>
+      <h2>Ideas die<br>between tabs.</h2>
+      <p>Every copied URL costs focus. Pullhub keeps references moving straight into your board.</p>
+    </div>
+    <div class="problem-right" data-comment-anchor="96086472d2-div">
+      <!-- PULLHUB_INTERACTION_V2 START: problem mock hooks -->
+      <div class="savewin">
+        <div class="savewin-bar">
+          <span class="sw-dot"></span><span class="sw-dot"></span><span class="sw-dot"></span>
+          <span class="savewin-addr">🔒 <span class="tab-cycle" aria-label="pinterest.com/search/branding"></span></span>
+          <span class="savewin-tag">PULLHUB ON</span>
+        </div>
+        <div class="source-tabs" aria-hidden="true">
+          <span>Pinterest</span><span>Behance</span><span>Are.na</span><span>Figma</span>
+        </div>
+        <div class="savewin-body" data-comment-anchor="294ec3c0d2-div">
+          <div class="ref-grid">
+            <button class="ref-tile" style="--i:0;background:repeating-linear-gradient(35deg,oklch(0.7 0.17 45) 0 14px,oklch(0.78 0.13 55) 14px 28px)"><span class="save-pill">+ Save to board</span><span class="check"><b>✓</b></span></button>
+            <button class="ref-tile" style="--i:1;background:repeating-linear-gradient(0deg,oklch(0.55 0.13 250) 0 10px,oklch(0.64 0.1 255) 10px 20px)"><span class="save-pill">+ Save to board</span><span class="check"><b>✓</b></span></button>
+            <button class="ref-tile" style="--i:2;background:repeating-linear-gradient(90deg,oklch(0.85 0.04 95) 0 12px,oklch(0.9 0.02 95) 12px 24px)"><span class="save-pill">+ Save to board</span><span class="check"><b>✓</b></span></button>
+            <button class="ref-tile" style="--i:3;background:repeating-linear-gradient(45deg,oklch(0.6 0.16 350) 0 13px,oklch(0.7 0.12 350) 13px 26px)"><span class="save-pill">+ Save to board</span><span class="check"><b>✓</b></span></button>
+            <button class="ref-tile" style="--i:4;background:repeating-linear-gradient(135deg,oklch(0.68 0.15 155) 0 14px,oklch(0.76 0.11 155) 14px 28px)"><span class="save-pill">+ Save to board</span><span class="check"><b>✓</b></span></button>
+            <button class="ref-tile" style="--i:5;background:repeating-linear-gradient(20deg,oklch(0.3 0.02 65) 0 12px,oklch(0.4 0.02 65) 12px 24px)"><span class="save-pill">+ Save to board</span><span class="check"><b>✓</b></span></button>
+          </div>
+        </div>
+        <div class="save-board">
+          <span class="sb-star">★</span>
+          <span class="sb-name">Rebrand · moodboard</span>
+          <span class="sb-dots"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          <span class="sb-count" data-comment-anchor="4b8eca835b-div"><b>0</b> saved</span>
+          <span class="board-preview" aria-label="Saved reference previews"></span>
+        </div>
+      </div>
+      <!-- PULLHUB_INTERACTION_V2 END -->
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" data-screen-label="How it works">
+    <div class="works-head rule-b" data-comment-anchor="2cdfb9f724-div">
+      <span class="kicker"><span class="bar" style="width:26px;height:3px;background:var(--accent);display:inline-block"></span> How it works</span>
+      <div class="wh-row">
+        <h2>Three moves.<br>Zero busywork.</h2>
+        <p>From saved reference to finished slide, Pullhub handles the dragging, copying and resizing.</p>
+      </div>
+    </div>
+
+    <div class="step-row rule-b">
+      <div class="step-copy" data-comment-anchor="e012ca24af-div">
+        <span class="step-num"><span class="n">01</span> PULL</span>
+        <h3>Pull anything off the web</h3>
+        <p>Right-click to save any image instantly, or use area capture to crop the exact slice you want.</p>
+        <div class="step-chips"><span class="c">→ Right-click save</span><span class="c">→ Area capture</span></div>
+      </div>
+      <div class="step-media" data-comment-anchor="a38b1aa518-div">
+        <div class="mock pull-mock">
+          <div class="mock-bar"><span class="dot p"></span><span class="dot y"></span><span class="dot g"></span><span class="ttl">behance.net/gallery/4421</span><span class="pill">AREA CAPTURE</span></div>
+          <div class="pull-canvas">
+            <div class="marquee">
+              <span class="h tl"></span><span class="h tr"></span><span class="h bl"></span><span class="h br"></span>
+              <span class="dims">820 × 540</span>
+            </div>
+            <span class="pull-chip">Pulled to Pullhub ✓</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-row step-row--save rule-b">
+      <div class="step-copy" data-comment-anchor="3e1ee687a0-div">
+        <span class="step-num"><span class="n">02</span> SAVE</span>
+        <h3>Save into project boards</h3>
+        <p>Drop references onto named, color-coded boards. Every idea lands in its own place without messy folders.</p>
+        <div class="step-chips"><span class="c">→ Named boards</span><span class="c">→ Color codes</span></div>
+      </div>
+      <div class="step-media" data-comment-anchor="861c8c7b04-div">
+        <div class="mock save-mock">
+          <div class="save-head">
+            <span class="thumb logo" data-comment-anchor="56e81553ae-span"><img src="pullhub-icon.svg" alt="Pullhub"></span>
+            <div><div class="t" data-comment-anchor="de297e5ea5-div">My Boards</div><div class="s">Pick a board →</div></div>
+          </div>
+          <div class="board-pick">
+            <button class="bp"><span class="d" style="background:var(--accent)"></span><span class="bp-name">Art Direction</span><em>14</em></button>
+            <button class="bp is-on"><span class="d" style="background:var(--pop-2)"></span><span class="bp-name">Mood Board</span><em>+1</em><span class="ck">✓</span></button>
+            <button class="bp"><span class="d" style="background:var(--pop-1)"></span><span class="bp-name">References</span><em>9</em></button>
+            <button class="bp add">+ New board</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-row rule-b">
+      <div class="step-copy" data-comment-anchor="f104325911-div">
+        <span class="step-num"><span class="n">03</span> SLIDE</span>
+        <h3>Push to Google Slides</h3>
+        <p>One click sends a whole board to Slides with layout and formatting handled for you.</p>
+        <div class="step-chips"><span class="c">→ One-click sync</span><span class="c">→ Auto-layout</span></div>
+      </div>
+      <div class="step-media" data-comment-anchor="ed31d799e7-div">
+        <div class="mock slide-mock">
+          <div class="mock-bar"><span class="dot y"></span><span class="ttl">Rebrand deck · Google Slides</span><button class="pill slide-push-btn" type="button">PUSH BOARD</button></div>
+          <div class="slide-body">
+            <div class="filmstrip"><i class="on"></i><i></i><i></i><i></i></div>
+            <div class="slide-canvas">
+              <div class="slide-frame">
+                <span style="background:repeating-linear-gradient(45deg,oklch(0.72 0.17 45) 0 7px,oklch(0.8 0.13 55) 7px 14px)"></span>
+                <span style="background:repeating-linear-gradient(0deg,oklch(0.55 0.13 250) 0 6px,oklch(0.64 0.1 255) 6px 12px)"></span>
+                <span style="background:repeating-linear-gradient(90deg,oklch(0.85 0.04 95) 0 7px,oklch(0.9 0.02 95) 7px 14px)"></span>
+                <span style="background:repeating-linear-gradient(135deg,oklch(0.6 0.16 350) 0 7px,oklch(0.7 0.12 350) 7px 14px)"></span>
+                <span style="background:repeating-linear-gradient(20deg,oklch(0.68 0.15 155) 0 7px,oklch(0.76 0.11 155) 7px 14px)"></span>
+                <span style="background:repeating-linear-gradient(45deg,oklch(0.3 0.02 65) 0 7px,oklch(0.42 0.02 65) 7px 14px)"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- extra tools -->
+    <div class="tools rule-b">
+      <div class="tool" data-comment-anchor="0fa74fc91b-div">
+        <h4>Share &amp; collaborate</h4>
+        <p data-comment-anchor="3a209eb8f8-p">Generate a link for any board. Teammates and clients can view it instantly, no account needed.</p>
+        <div class="mock share-mock">
+          <div class="share-top">
+            <span class="ic">🔗</span>
+            <div><div class="t">Rebrand · moodboard</div><div class="s">Anyone with the link can view</div></div>
+          </div>
+          <div class="link-row"><span class="url">debutt.studio/boards/rebrand</span><button class="cp">Copy</button></div>
+        </div>
+      </div>
+      <div class="tool" data-comment-anchor="a5e6cffb3a-div">
+        <h4>Export as ZIP</h4>
+        <p>Need the raw files? Download every image on a board as a single ZIP, ready to hand off.</p>
+        <div class="mock zip-mock">
+          <div class="zip-head">
+            <span class="ico">ZIP</span>
+            <div><div class="t">Rebrand-board.zip</div><div class="s">24 images · 18.4 MB</div></div>
+          </div>
+          <div class="zip-list">
+            <div class="zr"><span class="zt" style="background:repeating-linear-gradient(45deg,oklch(0.72 0.17 45) 0 5px,oklch(0.8 0.13 55) 5px 10px)"></span>ref-01.png <em>1.2 MB</em></div>
+            <div class="zr"><span class="zt" style="background:repeating-linear-gradient(0deg,oklch(0.55 0.13 250) 0 5px,oklch(0.64 0.1 255) 5px 10px)"></span>hero-shot.jpg <em>2.8 MB</em></div>
+            <div class="zr"><span class="zt" style="background:repeating-linear-gradient(90deg,oklch(0.6 0.16 350) 0 5px,oklch(0.7 0.12 350) 5px 10px)"></span>type-grid.png <em>0.9 MB</em></div>
+          </div>
+          <button class="zip-dl">Download ZIP ↓</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOARDS (dark) -->
+  <section class="boards rule-b" id="boards" data-screen-label="Boards">
+    <div class="boards-copy">
+      <span class="kicker">Stackable boards</span>
+      <h2>Boards that <em>never run out</em> of room.</h2>
+      <p>Every project gets its own open, stackable board. Collect freely, stack them as high as the idea goes, and share the whole thing with a link.</p>
+      <div class="boards-list">
+        <div class="li"><b style="background:var(--accent)"></b> Unlimited, color-coded boards on Pro</div>
+        <div class="li"><b style="background:var(--pop-2)"></b> Share with a link, or export as ZIP</div>
+        <div class="li"><b style="background:var(--pop-1)"></b> Everything syncs to Slides in a click</div>
+      </div>
+    </div>
+    <div class="boards-stage" data-comment-anchor="d052eeb7aa-div">
+      <span class="drag-hint"><span class="dot"></span>Drag to arrange, recolor, share or push any board to Slides</span>
+      <button class="tidy-btn">Tidy ↗</button>
+      <div class="board-toast">Done</div>
+      <div class="board-card c1" data-name="Rebrand">
+        <div class="bc-head"><div class="bc-name"><span class="swatch"></span>Rebrand · moodboard</div><span class="count">24</span></div>
+        <div class="thumbs"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="bc-actions">
+          <div class="bc-color">
+            <button data-c="var(--accent)" style="background:var(--accent)" aria-pressed="true" title="Yellow"></button>
+            <button data-c="var(--pop-2)" style="background:var(--pop-2)" aria-pressed="false" title="Blue"></button>
+            <button data-c="var(--pop-1)" style="background:var(--pop-1)" aria-pressed="false" title="Pink"></button>
+            <button data-c="oklch(0.7 0.16 150)" style="background:oklch(0.7 0.16 150)" aria-pressed="false" title="Green"></button>
+          </div>
+          <div class="bc-do">
+            <button class="bc-btn share" title="Copy share link">Share</button>
+            <button class="bc-btn slides" title="Push to Google Slides">Slides ↗</button>
+          </div>
+        </div>
+      </div>
+      <div class="board-card c2" data-name="UI inspo">
+        <div class="bc-head"><div class="bc-name"><span class="swatch"></span>UI inspo</div><span class="count">61</span></div>
+        <div class="thumbs"><i></i><i></i><i></i><i></i><i></i><i data-comment-anchor="00d6729006-i"></i></div>
+        <div class="bc-actions">
+          <div class="bc-color">
+            <button data-c="var(--accent)" style="background:var(--accent)" aria-pressed="false" title="Yellow"></button>
+            <button data-c="var(--pop-2)" style="background:var(--pop-2)" aria-pressed="true" title="Blue"></button>
+            <button data-c="var(--pop-1)" style="background:var(--pop-1)" aria-pressed="false" title="Pink"></button>
+            <button data-c="oklch(0.7 0.16 150)" style="background:oklch(0.7 0.16 150)" aria-pressed="false" title="Green"></button>
+          </div>
+          <div class="bc-do">
+            <button class="bc-btn share" title="Copy share link">Share</button>
+            <button class="bc-btn slides" title="Push to Google Slides">Slides ↗</button>
+          </div>
+        </div>
+      </div>
+      <div class="board-card c3" data-name="Type studies">
+        <div class="bc-head"><div class="bc-name"><span class="swatch"></span>Type studies</div><span class="count">12</span></div>
+        <div class="thumbs"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="bc-actions">
+          <div class="bc-color">
+            <button data-c="var(--accent)" style="background:var(--accent)" aria-pressed="false" title="Yellow"></button>
+            <button data-c="var(--pop-2)" style="background:var(--pop-2)" aria-pressed="false" title="Blue"></button>
+            <button data-c="var(--pop-1)" style="background:var(--pop-1)" aria-pressed="true" title="Pink"></button>
+            <button data-c="oklch(0.7 0.16 150)" style="background:oklch(0.7 0.16 150)" aria-pressed="false" title="Green"></button>
+          </div>
+          <div class="bc-do">
+            <button class="bc-btn share" title="Copy share link">Share</button>
+            <button class="bc-btn slides" title="Push to Google Slides">Slides ↗</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="rule-b" data-screen-label="Pricing">
+    <div class="pricing-head">
+      <h2>Start free. Go unlimited when you're ready.</h2>
+      <p>No credit card to start. Pro unlocks unlimited everything plus sharing, with a 14-day free trial.</p>
+    </div>
+    <div class="plans">
+      <div class="plan free">
+        <div class="pname">Free</div>
+        <div class="price">$0<small> /forever</small></div>
+        <div class="pnote">Everything you need to try it out.</div>
+        <ul>
+          <li><span class="tick">✓</span> Up to 4 boards</li>
+          <li><span class="tick">✓</span> 8 saved references</li>
+          <li><span class="tick">✓</span> Push to Google Slides</li>
+          <li><span class="tick">✓</span> ZIP export</li>
+        </ul>
+        <a class="btn" href="#">Add to Chrome</a>
+      </div>
+      <div class="plan pro">
+        <span class="flag">14-day free trial</span>
+        <div class="pname">Pro</div>
+        <div class="price">$5.00<small> /mo</small></div>
+        <div class="pnote">Billed annually at USD 60/year · or $6.99 billed monthly</div>
+        <ul>
+          <li><span class="tick">✓</span> Unlimited boards</li>
+          <li><span class="tick">✓</span> Unlimited image storage</li>
+          <li><span class="tick">✓</span> Board sharing &amp; links</li>
+          <li><span class="tick">✓</span> Everything in Free</li>
+        </ul>
+        <a class="btn" href="#">Start free trial</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-band rule-b" data-screen-label="Final CTA" data-comment-anchor="dad20f34eb-section">
+    <h2>Pull it. Save it.<br><em>Slide it.</em></h2>
+    <a class="btn btn--yellow" href="#">Add Pullhub to Chrome free</a>
+  </section>
+
+  <!-- SUPPORT -->
+  <section class="support rule-b" data-screen-label="Support">
+    <div class="support-l">
+      <span class="kicker"><span class="bar" style="width:26px;height:3px;background:var(--accent);display:inline-block"></span> Need a hand?</span>
+      <h3>Got a question?</h3>
+      <p>We're a small studio and we read every message. Reach out and a real human will get back to you.</p>
+    </div>
+    <a class="btn btn--yellow support-mail" href="mailto:support@debutt.studio">support@debutt.studio →</a>
+  </section>
+  <div class="hazard hazard-strip rule-b"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="#"><img class="logo-mark" src="pullhub-icon.svg" alt="Pullhub">Pullhub</a>
+        <p>The reference manager for creatives. Pull from the web, save to boards, push to slides.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h5>Product</h5>
+          <a href="#how">How it works</a>
+          <a href="#boards">Boards</a>
+          <a href="#pricing">Pricing</a>
+          <a href="support.html">Contact</a>
+        </div>
+        <div class="foot-col">
+          <h5>Legal</h5>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <span>© 2026 Pullhub. Built for creatives.</span>
+      <span class="mono">PULL. SAVE. SLIDE.</span>
+    </div>
+  </footer>
+
+</div>
+
+<!-- drag-to-fill slots -->
+<script src="assets/scripts/c8d2a802-ebc7-4c94-9e35-f8de829af1ab.js"></script>
+
+<!-- draggable boards mini-demo -->
+<script src="assets/scripts/e9e8aad3-3b85-49c6-ad53-708f959fc433.js"></script>
+
+<!-- problem: tab-switching focus demo -->
+<script src="assets/scripts/3d0b7e80-d6e1-4728-ae73-ce3a5767ac1a.js"></script>
+
+<!-- lightweight landing interactions -->
+<script src="assets/scripts/pullhub-demo-interactions.js"></script>
+
+
+
+</body></html>
