@@ -306,6 +306,8 @@
         const folderName = name.replace(/[/\\:*?"<>|]/g, '_');
         const folder = zip.folder(folderName);
         const metaItems = [];
+        let embeddedCount = 0;
+        let blockedCount = 0;
 
         for (let i = 0; i < items.length; i++) {
           const item = items[i];
@@ -318,6 +320,7 @@
             const file = `shared_${pad}.${ext}`;
             folder.file(file, b64, { base64: true });
             mutable.file = file;
+            embeddedCount++;
             delete mutable.dataUrl;
           } else if (item.url) {
             try {
@@ -328,12 +331,28 @@
                 const file = `shared_${pad}.${ext}`;
                 folder.file(file, await blob.arrayBuffer());
                 mutable.file = file;
+                embeddedCount++;
+              } else {
+                blockedCount++;
               }
             } catch(e) {
               // Keep URL-only metadata when remote images block cross-origin downloads.
+              blockedCount++;
             }
           }
           metaItems.push(mutable);
+        }
+
+        if (blockedCount > 0) {
+          zip.file('README.txt', [
+            'Pullhub shared board ZIP export',
+            '',
+            `${embeddedCount} image file(s) were embedded in this ZIP.`,
+            `${blockedCount} remote image(s) could not be embedded because the image host blocked browser downloads.`,
+            '',
+            'Blocked remote images remain as URLs in metadata.json.',
+            'For a fuller backup of remote images, export the board from the Pullhub extension.'
+          ].join('\n'));
         }
 
         zip.file('metadata.json', JSON.stringify({
@@ -353,7 +372,8 @@
         a.click();
         a.remove();
         URL.revokeObjectURL(objUrl);
-        exportBtn.textContent = 'Exported';
+        exportBtn.textContent = `Exported: ${embeddedCount} file${embeddedCount === 1 ? '' : 's'}, ${blockedCount} blocked`;
+        alert(`Export complete.\n\nEmbedded image files: ${embeddedCount}\nRemote images not embedded: ${blockedCount}`);
         setTimeout(() => { exportBtn.textContent = originalText; }, 1800);
       } catch(e) {
         alert('Export failed: ' + (e.message || 'Unknown error'));
