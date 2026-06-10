@@ -118,11 +118,11 @@
     .grid.portrait .card img { aspect-ratio: 3/4; object-fit: cover; }
 
     /* ── Masonry layout ── */
-    .grid.masonry { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 260px)); justify-content: start; align-items: start; }
-    .grid.masonry .card { display: block; }
+    .grid.masonry { display: block; columns: 260px; column-gap: 16px; }
+    .grid.masonry .card { display: inline-block; width: 100%; margin: 0 0 16px; break-inside: avoid; }
     .grid.masonry .card img { aspect-ratio: unset; height: auto; }
-    @media (max-width: 900px) { .grid.masonry { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); } }
-    @media (max-width: 600px) { .grid.masonry { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); } }
+    @media (max-width: 900px) { .grid.masonry { columns: 190px; } }
+    @media (max-width: 600px) { .grid.masonry { columns: 1; } }
 
     /* ── Cards ── */
     .card {
@@ -320,6 +320,8 @@
       background: #f8f9fb;
     }
     body.theme-classic .grid { gap: 18px; }
+    body.theme-classic .grid.masonry { column-gap: 18px; }
+    body.theme-classic .grid.masonry .card { margin-bottom: 18px; }
     body.theme-classic .card,
     body.theme-classic .card:nth-child(3n+2),
     body.theme-classic .card:nth-child(3n+3) {
