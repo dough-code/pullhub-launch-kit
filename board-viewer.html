@@ -109,6 +109,10 @@
       box-shadow: 2px 2px 0 0 var(--ink); transition: transform .12s ease, box-shadow .12s ease, background .15s;
     }
     #export-zip-btn:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 0 var(--ink); background: var(--accent); }
+    .export-note {
+      flex-basis: 100%; max-width: 520px; margin-left: auto;
+      font-size: 11px; line-height: 1.35; color: var(--muted); text-align: right;
+    }
 
     /* ── Grid layout (default) ── */
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
@@ -504,6 +508,7 @@
     </div>
     <button id="copy-link-btn">🔗 Copy link</button>
     <button id="export-zip-btn" type="button">Export ZIP</button>
+    <div class="export-note">Shared ZIP exports captured/downloadable images only. Blocked remote images remain as URLs in metadata.</div>
     <span class="powered">Shared via Pullhub</span>
   </div>
 </header>

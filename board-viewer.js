@@ -373,7 +373,10 @@
         a.remove();
         URL.revokeObjectURL(objUrl);
         exportBtn.textContent = `Exported: ${embeddedCount} file${embeddedCount === 1 ? '' : 's'}, ${blockedCount} blocked`;
-        alert(`Export complete.\n\nEmbedded image files: ${embeddedCount}\nRemote images not embedded: ${blockedCount}`);
+        const blockedNote = blockedCount > 0
+          ? '\n\nFor full board backup, use Export ZIP inside the Pullhub extension.\nShared board Export ZIP may include only captured or downloadable images; blocked remote images remain as URLs in metadata.'
+          : '';
+        alert(`Export complete.\n\nEmbedded image files: ${embeddedCount}\nRemote images not embedded: ${blockedCount}${blockedNote}`);
         setTimeout(() => { exportBtn.textContent = originalText; }, 1800);
       } catch(e) {
         alert('Export failed: ' + (e.message || 'Unknown error'));
