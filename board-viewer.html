@@ -110,8 +110,8 @@
     }
     #export-zip-btn:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 0 var(--ink); background: var(--accent); }
     .export-note {
-      flex-basis: 100%; max-width: 520px; margin-left: auto;
-      font-size: 11px; line-height: 1.35; color: var(--muted); text-align: right;
+      margin: -10px 0 18px; font-size: 11.5px; line-height: 1.45;
+      color: var(--muted); max-width: 760px;
     }
 
     /* ── Grid layout (default) ── */
@@ -508,7 +508,6 @@
     </div>
     <button id="copy-link-btn">🔗 Copy link</button>
     <button id="export-zip-btn" type="button">Export ZIP</button>
-    <div class="export-note">Shared ZIP exports captured/downloadable images only. Blocked remote images remain as URLs in metadata.</div>
     <span class="powered">Shared via Pullhub</span>
   </div>
 </header>
@@ -536,6 +535,7 @@
         <button id="btn-layout-masonry" class="layout-btn"        title="Masonry layout (Pinterest style)">⊟</button>
       </div>
     </div>
+    <div class="export-note">Shared ZIP may skip blocked remote images. For full board backup, use Export ZIP inside the Pullhub extension.</div>
     <div class="grid" id="grid"></div>
   </div>
 </main>
