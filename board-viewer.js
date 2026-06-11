@@ -19,6 +19,36 @@
 
   if (!boardId || !projectId) { showError('Missing board ID or project ID in URL'); return; }
 
+  function getSafeHttpUrl(rawValue) {
+    if (typeof rawValue !== 'string') return null;
+    const value = rawValue.trim();
+    if (!value) return null;
+    try {
+      const parsed = new URL(value);
+      return parsed.protocol === 'http:' || parsed.protocol === 'https:' ? parsed.href : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function getSafeImageSrc(rawValue) {
+    if (typeof rawValue !== 'string') return null;
+    const value = rawValue.trim();
+    if (!value) return null;
+    const safeHttpUrl = getSafeHttpUrl(value);
+    if (safeHttpUrl) return safeHttpUrl;
+    if (/^data:image\/(?:png|jpe?g|webp|gif);base64,[a-z0-9+/=\s]+$/i.test(value)) {
+      return value;
+    }
+    return null;
+  }
+
+  function getSafeColor(rawValue, fallback = '#e5e7eb') {
+    if (typeof rawValue !== 'string') return fallback;
+    const value = rawValue.trim();
+    return /^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(value) ? value : fallback;
+  }
+
   const url = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/shared_boards/${boardId}`;
   let doc;
   try {
@@ -49,6 +79,7 @@
   const fields   = doc.fields || {};
   const name     = fv(fields.name)  || 'Shared Board';
   const color    = fv(fields.color) || '#1D9E75';
+  const safeColor = getSafeColor(color, '#1D9E75');
   const rawItems = fields.items?.arrayValue?.values || [];
 
   const items = rawItems.map(v => {
@@ -88,7 +119,11 @@
   }
 
   async function downloadSharedImage(item, idx) {
-    const src = item.dataUrl || item.url;
+    const src = getSafeImageSrc(item.dataUrl || item.url);
+    if (!src) {
+      alert('This image cannot be downloaded because its source is unavailable or unsupported.');
+      return;
+    }
     const baseName = `pullhub-${name.replace(/[/\\:*?"<>|]/g, '_')}-${String(idx + 1).padStart(2, '0')}`;
     try {
       if (src.startsWith('data:')) {
@@ -110,7 +145,7 @@
   // ── Render header ─────────────────────────────────────────────
   document.getElementById('state-loading').style.display = 'none';
   document.getElementById('board-view').style.display    = 'block';
-  document.getElementById('board-dot').style.background  = color;
+  document.getElementById('board-dot').style.background  = safeColor;
   document.getElementById('board-title').textContent     = name;
   document.getElementById('board-count').textContent     = `${items.length} image${items.length !== 1 ? 's' : ''}`;
   document.getElementById('hdr-meta').textContent        = `"${name}" · ${items.length} items`;
@@ -154,15 +189,25 @@
 
   // ── Build cards ───────────────────────────────────────────────
   items.forEach((item, idx) => {
-    const src = item.dataUrl || item.url;
+    const src = getSafeImageSrc(item.dataUrl || item.url);
+    const pageUrl = getSafeHttpUrl(item.pageUrl);
     const card = document.createElement('div');
     card.className = 'card';
     card.dataset.idx = idx;
 
     // Image
-    const img = document.createElement('img');
-    img.src = src; img.alt = ''; img.loading = 'lazy';
-    card.appendChild(img);
+    let img = null;
+    if (src) {
+      img = document.createElement('img');
+      img.src = src; img.alt = ''; img.loading = 'lazy';
+      card.appendChild(img);
+    } else {
+      const placeholder = document.createElement('div');
+      placeholder.className = 'image-placeholder';
+      placeholder.textContent = 'Image unavailable';
+      placeholder.style.cssText = 'min-height:160px;display:flex;align-items:center;justify-content:center;background:#e5e7eb;color:#6b7280;font-size:13px;font-weight:600;';
+      card.appendChild(placeholder);
+    }
 
     // Hover quick actions
     const actions = document.createElement('div');
@@ -178,12 +223,12 @@
       downloadSharedImage(item, idx);
     });
     actions.appendChild(dlBtn);
-    if (item.pageUrl) {
+    if (pageUrl) {
       const sourceBtn = document.createElement('a');
       sourceBtn.className = 'card-action-btn';
-      sourceBtn.href = item.pageUrl;
+      sourceBtn.href = pageUrl;
       sourceBtn.target = '_blank';
-      sourceBtn.rel = 'noopener';
+      sourceBtn.rel = 'noopener noreferrer';
       sourceBtn.title = 'Visit source';
       sourceBtn.textContent = '↗';
       sourceBtn.addEventListener('click', e => e.stopPropagation());
@@ -194,13 +239,18 @@
     // Card footer: source link + note
     const footer = document.createElement('div');
     footer.className = 'card-footer';
-    if (item.pageUrl) {
+    if (pageUrl) {
       const link = document.createElement('a');
-      link.href = item.pageUrl; link.target = '_blank'; link.rel = 'noopener noreferrer';
-      link.title = item.pageUrl; link.className = 'card-source-link';
-      try { link.textContent = new URL(item.pageUrl).hostname; }
+      link.href = pageUrl; link.target = '_blank'; link.rel = 'noopener noreferrer';
+      link.title = pageUrl; link.className = 'card-source-link';
+      try { link.textContent = new URL(pageUrl).hostname; }
       catch { link.textContent = 'Source ↗'; }
       footer.appendChild(link);
+    } else if (item.pageUrl) {
+      const unavailable = document.createElement('span');
+      unavailable.className = 'card-source-link';
+      unavailable.textContent = 'Source unavailable';
+      footer.appendChild(unavailable);
     }
     if (item.note) {
       const noteEl = document.createElement('div');
@@ -211,7 +261,7 @@
     if (footer.hasChildNodes()) card.appendChild(footer);
 
     // Click → lightbox
-    img.addEventListener('click', () => openLightbox(idx));
+    if (img) img.addEventListener('click', () => openLightbox(idx));
     grid.appendChild(card);
   });
 
@@ -234,7 +284,11 @@
 
   function renderLightbox() {
     const item = items[lbIdx];
-    const src  = item.dataUrl || item.url;
+    const src  = getSafeImageSrc(item.dataUrl || item.url);
+    if (!src) {
+      closeLightbox();
+      return;
+    }
     lbImg.src  = src;
     lbDl.href  = src;
     lbDl.download = `pullhub-image-${String(lbIdx + 1).padStart(2, '0')}.${extensionFromSource(src)}`;
@@ -242,9 +296,10 @@
     // Source link
     const existing = document.getElementById('lb-source');
     if (existing) existing.remove();
-    if (item.pageUrl) {
+    const pageUrl = getSafeHttpUrl(item.pageUrl);
+    if (pageUrl) {
       const a = document.createElement('a');
-      a.id = 'lb-source'; a.href = item.pageUrl; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      a.id = 'lb-source'; a.href = pageUrl; a.target = '_blank'; a.rel = 'noopener noreferrer';
       a.textContent = '↗ Visit source';
       a.style.cssText = 'position:absolute;bottom:20px;left:20px;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:7px 14px;font-size:13px;font-weight:600;text-decoration:none;font-family:inherit;';
       lb.appendChild(a);
@@ -312,19 +367,21 @@
         for (let i = 0; i < items.length; i++) {
           const item = items[i];
           const mutable = { ...item };
+          const safeDataUrl = getSafeImageSrc(item.dataUrl);
+          const safeUrl = getSafeImageSrc(item.url);
           const pad = String(i + 1).padStart(3, '0');
 
-          if (item.dataUrl && item.dataUrl.startsWith('data:')) {
-            const [header, b64] = item.dataUrl.split(',');
+          if (safeDataUrl && safeDataUrl.startsWith('data:')) {
+            const [header, b64] = safeDataUrl.split(',');
             const ext = header.includes('jpeg') || header.includes('jpg') ? 'jpg' : header.includes('gif') ? 'gif' : 'png';
             const file = `shared_${pad}.${ext}`;
             folder.file(file, b64, { base64: true });
             mutable.file = file;
             embeddedCount++;
             delete mutable.dataUrl;
-          } else if (item.url) {
+          } else if (safeUrl) {
             try {
-              const resp = await fetch(item.url);
+              const resp = await fetch(safeUrl);
               if (resp.ok) {
                 const blob = await resp.blob();
                 const ext = blob.type.includes('gif') ? 'gif' : blob.type.includes('png') ? 'png' : blob.type.includes('webp') ? 'webp' : 'jpg';
@@ -339,6 +396,8 @@
               // Keep URL-only metadata when remote images block cross-origin downloads.
               blockedCount++;
             }
+          } else if (item.dataUrl || item.url) {
+            blockedCount++;
           }
           metaItems.push(mutable);
         }
