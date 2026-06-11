@@ -168,12 +168,14 @@
   let currentLayout = localStorage.getItem(LAYOUT_KEY) || 'grid';
   if (!VALID_LAYOUTS.has(currentLayout)) currentLayout = 'grid';
   const grid = document.getElementById('grid');
+  const itemCountClass = items.length <= 3 ? ` items-${items.length}` : '';
+  grid.style.setProperty('--few-item-count', String(Math.max(1, Math.min(items.length, 3))));
 
   function applyLayout(layout) {
     if (!VALID_LAYOUTS.has(layout)) layout = 'grid';
     currentLayout = layout;
     localStorage.setItem(LAYOUT_KEY, layout);
-    grid.className = layout === 'grid' ? 'grid' : `grid ${layout}`;
+    grid.className = layout === 'grid' ? `grid${itemCountClass}` : `grid ${layout}${itemCountClass}`;
     document.getElementById('btn-layout-grid').classList.toggle('active', layout === 'grid');
     document.getElementById('btn-layout-portrait').classList.toggle('active', layout === 'portrait');
     document.getElementById('btn-layout-masonry').classList.toggle('active', layout === 'masonry');

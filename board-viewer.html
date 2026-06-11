@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'">
+  <meta name="viewport" CONTENT="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" CONTENT="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'">
   <title>Pullhub | Board Viewer</title>
   <link rel="icon" href="pullhub-icon.svg" type="image/svg+xml">
   <style>
@@ -117,16 +117,44 @@
 
     /* ── Grid layout (default) ── */
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .grid.items-1,
+    .grid.items-2,
+    .grid.items-3 { justify-content: center; }
+    .grid.items-1 { grid-template-columns: minmax(220px, 280px); }
+    .grid.items-2 { grid-template-columns: repeat(2, minmax(220px, 280px)); }
+    .grid.items-3 { grid-template-columns: repeat(3, minmax(220px, 280px)); }
 
     /* ── Portrait layout ── */
     .grid.portrait { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+    .grid.portrait.items-1 { grid-template-columns: minmax(180px, 240px); }
+    .grid.portrait.items-2 { grid-template-columns: repeat(2, minmax(180px, 240px)); }
+    .grid.portrait.items-3 { grid-template-columns: repeat(3, minmax(180px, 240px)); }
     .grid.portrait .card img { aspect-ratio: 3/4; object-fit: cover; }
 
     /* ── Masonry layout ── */
     .grid.masonry { display: block; columns: 260px; column-gap: 16px; }
+    .grid.masonry.items-1,
+    .grid.masonry.items-2,
+    .grid.masonry.items-3 {
+      display: grid;
+      columns: auto;
+      grid-template-columns: repeat(var(--few-item-count), minmax(220px, 280px));
+      justify-content: center;
+      align-items: start;
+    }
     .grid.masonry .card { display: inline-block; width: 100%; margin: 0 0 16px; break-inside: avoid; }
     .grid.masonry .card img { aspect-ratio: unset; height: auto; }
     @media (max-width: 900px) { .grid.masonry { columns: 190px; } }
+    @media (max-width: 760px) {
+      .grid.items-2,
+      .grid.items-3,
+      .grid.portrait.items-2,
+      .grid.portrait.items-3,
+      .grid.masonry.items-2,
+      .grid.masonry.items-3 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
     @media (max-width: 600px) { .grid.masonry { columns: 1; } }
 
     /* ── Cards ── */
