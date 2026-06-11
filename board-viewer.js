@@ -16,6 +16,7 @@
   const params    = new URLSearchParams(location.search);
   const boardId   = params.get('bid');
   const projectId = params.get('pid');
+  const unavailableMessage = 'This board is unavailable, private, or the link is no longer valid.\n\nPlease ask the board owner for a new share link.';
 
   if (!boardId || !projectId) { showError('Missing board ID or project ID in URL'); return; }
 
@@ -57,17 +58,17 @@
     const resp = await fetch(url, { signal: controller.signal });
     clearTimeout(timeoutId);
     if (resp.status === 403 || resp.status === 401) {
-      showError('Access denied (HTTP ' + resp.status + ').\n\nFix: Firebase Console → Firestore → Rules:\n\nmatch /shared_boards/{id} { allow read: if true; }');
+      showError(unavailableMessage);
       return;
     }
     if (resp.status === 404) { showError('Board not found — the share link may be expired or invalid.'); return; }
-    if (!resp.ok) { showError(`Firestore returned HTTP ${resp.status} — check your Firebase project ID.`); return; }
+    if (!resp.ok) { showError(unavailableMessage); return; }
     doc = await resp.json();
   } catch(e) {
     if (e.name === 'AbortError') {
-      showError('Request timed out after 12 seconds.\n\nPossible causes:\n• Firestore security rules blocking public reads\n• Incorrect Firebase project ID\n• Network connectivity issue');
+      showError('This board is taking too long to load. Please try again in a moment.');
     } else {
-      showError('Network error: ' + e.message);
+      showError('This board could not be loaded. Please check your connection and try again.');
     }
     return;
   }
