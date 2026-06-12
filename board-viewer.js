@@ -78,6 +78,18 @@
     return field.stringValue ?? field.booleanValue ?? field.integerValue ?? field.arrayValue ?? undefined;
   }
   const fields   = doc.fields || {};
+  const hasRequiredFields =
+    typeof fields.name?.stringValue === 'string' &&
+    typeof fields.color?.stringValue === 'string' &&
+    !!fields.items?.arrayValue &&
+    typeof fields.isPublic?.booleanValue === 'boolean' &&
+    typeof fields.createdAt?.timestampValue === 'string' &&
+    typeof fields.updatedAt?.timestampValue === 'string' &&
+    typeof fields.ownerUid?.stringValue === 'string' &&
+    fields.schemaVersion?.integerValue !== undefined &&
+    fields.viewCount?.integerValue !== undefined;
+  if (!hasRequiredFields) { showError(unavailableMessage); return; }
+  if (fields.isPublic.booleanValue === false) { showError('This shared board is no longer available.'); return; }
   const name     = fv(fields.name)  || 'Shared Board';
   const color    = fv(fields.color) || '#1D9E75';
   const safeColor = getSafeColor(color, '#1D9E75');
