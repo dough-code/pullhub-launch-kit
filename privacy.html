@@ -42,8 +42,11 @@
           <p>Information is used only to provide Pullhub features: saving boards, showing saved references, creating backups, sharing boards, authenticating Google access, pushing images to Google Slides, and managing subscription access.</p>
           <h2>Where information is stored</h2>
           <p>Most board data is stored locally in the browser using Chrome extension storage. If board sharing is used, shared-board data may be stored in Firebase/Firestore. Images pushed to Google Slides may be uploaded to Google Drive when required so Google Slides can access them.</p>
+          <h2>Google Drive image fallback</h2>
+          <p>When direct insertion into Google Slides fails, Pullhub may upload the image to the user's Google Drive folder named "Pullhub Uploads". The uploaded file may be set so anyone with the link can view or read it. This permission is required so Google Slides can access and insert the image. These files remain in the user's Google Drive and can be managed or deleted by the user.</p>
           <h2>Third-party services</h2>
           <p>Pullhub uses Google APIs for authentication, Drive, and Slides features; Firebase/Firestore for optional board sharing; and ExtensionPay/Stripe for subscription management.</p>
+          <p>The Chrome Web Store listing permission description should match the Google Drive image fallback disclosure in this policy.</p>
           <h2>Google API Limited Use</h2>
           <p>Pullhub's use and transfer of information received from Google APIs will adhere to the Chrome Web Store User Data Policy, including the Limited Use requirements.</p>
           <h2>What we do not do</h2>
